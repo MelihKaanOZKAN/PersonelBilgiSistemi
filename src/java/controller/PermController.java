@@ -16,7 +16,7 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name="AdminPage_Perms")
 @SessionScoped
 public class PermController {
-    Perms_Perm currentPerm;
+    Perms_Perm currentPerm = new Perms_Perm();
     List<Perms_Perm> permList;
     AdminPanel_Perms permDao = new AdminPanel_Perms();
     
@@ -30,8 +30,22 @@ public class PermController {
 
     public void setCurrentPerm(Perms_Perm currentPerm) {
         this.currentPerm = currentPerm;
-        System.out.println(currentPerm.PermId);
     }
     
-    
+    public void UpdatePerm()
+    {
+        if(currentPerm.PermId != 0)
+        {
+            permDao.UpdatePerm(currentPerm);
+        }
+        else{
+            permDao.AddPerm(currentPerm);
+        }
+        currentPerm = new Perms_Perm();
+    }
+    public void DeletePerm()
+    {
+        permDao.DeletePerm(currentPerm);
+        currentPerm = new Perms_Perm();
+    }
 }
