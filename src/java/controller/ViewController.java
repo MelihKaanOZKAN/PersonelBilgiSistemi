@@ -5,8 +5,8 @@
  */
 package controller;
 
-import Entitiy.LoginUserInfo;
-import Entitiy.Perms;
+import entity.LoginUserInfo;
+import entity.Perms;
 import Util.ConnectionClass;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;

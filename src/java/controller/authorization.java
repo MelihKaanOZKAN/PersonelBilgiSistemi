@@ -5,7 +5,7 @@
  */
 package controller;
 
-import Entitiy.LoginUserInfo;
+import entity.LoginUserInfo;
 import Util.ConnectionClass;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;

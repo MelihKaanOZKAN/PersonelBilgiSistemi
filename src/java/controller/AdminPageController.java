@@ -5,7 +5,7 @@
  */
 package controller;
 
-import Entitiy.AdminPage;
+import entity.AdminPage;
 import Util.ConnectionClass;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;

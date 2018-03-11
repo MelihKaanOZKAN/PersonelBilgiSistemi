@@ -3,7 +3,7 @@
 <html lang="en" 
      xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"  >
-<head>
+<h:head>
 <meta charset="utf-8"/>
 <title>Personel Takip Sistemi</title>
 	<link rel="stylesheet" type="text/css" href="css/stil.css"/>
@@ -11,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="css/AdminPanel.css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"/>
         <script src="js/boostrap.js" type="text/javascript"/>
-</head>
+</h:head>
 <body>
 	<div class="sablon">
 	<div class="banner">
@@ -62,13 +62,40 @@
                  </div> 
             <div class="alan">
                 <div class="FormDiv">
-                        <h:form>
-                                Kullanıcı Adı : <h:inputText value="#{auth.info.username}" required="true"></h:inputText> <br> </br>
-                        </h:form>
+                       
+                    
+                    <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_Perms.permList}"  var="perm">
+                            <h:column>
+                            <f:facet name="header">ID</f:facet>
+                                #{perm.permId}
+                             </h:column>
+                             <h:column>
+                            <f:facet name="header">Yetki Adı</f:facet>
+                                #{perm.permName}
+                             </h:column>
+                            <h:column>
+                            <f:facet name="header">Sayfa Linki</f:facet>
+                                #{perm.permLink}
+                             </h:column>
+                               <h:column>
+                                   <center>
+                                <f:facet name="header">İşlemler</f:facet>
+                                <div class="btn-group">
+                                    <h:form>
+                                         <h:commandButton  class="btn btn-info" action="#{AdminPage_Perms.setCurrentPerm(perm)}" value="Düzenle"></h:commandButton>
+                                    </h:form>
+                                </div>
+                                   </center>
+                            </h:column>
+		   </h:dataTable>
                 </div>
                 <div class="ButtonDiv">
                     <h:form>
-                         Kullanıcı Adıfwef: <h:inputText value="#{auth.info.username}" required="true"></h:inputText> <br> </br>
+                        Yetki Id: <h:outputText value="#{AdminPage_Perms.currentPerm.permId}"></h:outputText> <br> </br>
+                        Yetki Adı: <h:inputText value="#{AdminPage_Perms.currentPerm.permName}" required="true"></h:inputText> <br> </br>
+                        Sayfa Linki: <h:inputText value="#{AdminPage_Perms.currentPerm.permLink}" required="true"></h:inputText> <br> </br>
+                        <h:commandButton class="btn btn-primary" value="Kaydet"/>
+                        <h:commandButton class="btn btn-danger" value="Sil"/>
                     </h:form>
                 </div>
                 
