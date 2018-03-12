@@ -8,6 +8,7 @@ package controller;
 import entity.LoginUserInfo;
 import Util.ConnectionClass;
 import com.mysql.jdbc.PreparedStatement;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -19,7 +20,7 @@ import javax.inject.Named;
  */
 @ManagedBean(name="auth")
 @SessionScoped
-public class authorization {
+public class authorization implements Serializable {
 
     public LoginUserInfo getInfo() {
         return info;
@@ -27,14 +28,14 @@ public class authorization {
    
    public LoginUserInfo info;    
    public ViewController view;
-   
+   public boolean WrongPass=false;
     public authorization(){
         info = new LoginUserInfo();
         view = new ViewController();
         info.username="";
         info.password="";
     }
-
+    
    
     // if auth result isnt success, PersonInfo etc. wont defined.
     public String getAuthorized(){
@@ -47,6 +48,7 @@ public class authorization {
             stm.setString(1,info.username);
             stm.setString(2,info.password);
             ResultSet rs = stm.executeQuery();
+            
             while(rs.next())
             {
                     stm.clearParameters();
@@ -70,6 +72,10 @@ public class authorization {
            ex.printStackTrace();
         }
         return result;
+    }
+
+    public boolean isWrongPass() {
+        return WrongPass;
     }
 
     public ViewController getView() {

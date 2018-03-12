@@ -55,9 +55,14 @@
                  <div class="menu">             
                      <h:dataTable border="1" width="200" bgcolor="SteelBlue" value="#{auth.view.perms}"  var="perm">
 			    <h:column>
+                                <div class="MenuRow">
                                 <h:form>
+                                    <div style="padding-top:10px ">
                                     <h:commandLink action = "#{perm.redirectPermLink()}" value="#{perm.permName}"></h:commandLink> 
+                                    </div>
+                                
                                 </h:form>
+                                </div>
                             </h:column>
 		   </h:dataTable>
                  </div> 
@@ -87,6 +92,7 @@
                                     </h:form>
                                 </div>
                                    </center>
+                                   
                             </h:column>
 		   </h:dataTable>
                 </div>
@@ -105,3 +111,5 @@
 	</div>
 </body>
 </html>
+
+
