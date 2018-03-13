@@ -6,6 +6,7 @@
 package controller;
 import Dao.AdminPanel_Perms;
 import entity.Perms_Perm;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,7 +16,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name="AdminPage_Perms")
 @SessionScoped
-public class PermController {
+public class PermController implements Serializable {
     Perms_Perm currentPerm = new Perms_Perm();
     List<Perms_Perm> permList;
     AdminPanel_Perms permDao = new AdminPanel_Perms();

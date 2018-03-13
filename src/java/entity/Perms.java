@@ -10,27 +10,15 @@ package entity;
  * @author Casper
  */
 public class Perms {
-    String permName;
-    String permLink;
+    Perms_Perm perm ;
     boolean permVisual, permSet;
 
-    public String getPermName() {
-        return permName;
+    public Perms_Perm getPerm() {
+        return perm;
     }
 
-    public void setPermName(String permName) {
-        this.permName = permName;
-    }
-
-    public String getPermLink() {
-        return permLink;
-    }
-    public String redirectPermLink() {
-           return permLink;
-       }
-
-    public void setPermLink(String permLink) {
-        this.permLink = permLink;
+    public void setPerm(Perms_Perm perm) {
+        this.perm = perm;
     }
 
     public boolean isPermVisual() {

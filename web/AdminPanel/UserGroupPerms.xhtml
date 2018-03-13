@@ -58,7 +58,7 @@
                                 <div class="MenuRow">
                                 <h:form>
                                     <div style="padding-top:10px ">
-                                     <h:commandLink action = "#{perm.perm.getPermLink()}" value="#{perm.perm.permName}"></h:commandLink> 
+                                        <h:commandLink action = "#{perm.perm.getPermLink()}" value="#{perm.perm.permName}"></h:commandLink> 
                                     </div>
                                 
                                 </h:form>
@@ -69,41 +69,38 @@
             <div class="alan">
                 <div class="FormDiv">
                        
-                    
-                    <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_Perms.permList}"  var="perm">
+                    <h:form>
+                    <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_UserGroupPerms.permList}"  var="perm">
                             <h:column>
                             <f:facet name="header">ID</f:facet>
-                                #{perm.permId}
+                                #{perm.perm.permId}
                              </h:column>
                              <h:column>
                             <f:facet name="header">Yetki Adı</f:facet>
-                                #{perm.permName}
+                                #{perm.perm.permName}
                              </h:column>
-                            <h:column>
-                            <f:facet name="header">Sayfa Linki</f:facet>
-                                #{perm.permLink}
+                                <h:column>
+                            <f:facet name="header">Görüntüle</f:facet>
+                            <h:selectBooleanCheckbox value="#{perm.permVisual}"/>
+                             </h:column>
+                              <h:column>
+                            <f:facet name="header">Düzenle</f:facet>
+                            <h:selectBooleanCheckbox value="#{perm.permSet}"/>
                              </h:column>
                                <h:column>
                                    <center>
                                 <f:facet name="header">İşlemler</f:facet>
                                 <div class="btn-group">
-                                    <h:form>
-                                         <h:commandButton class="btn btn-info" action="#{AdminPage_Perms.setCurrentPerm(perm)}" value="Düzenle"></h:commandButton>
-                                    </h:form>
+                                        <h:commandButton class="btn btn-info"  value="Yetkiyi Gruba Tanımla"></h:commandButton>
                                 </div>
                                    </center>
-                                   
                             </h:column>
 		   </h:dataTable>
+                    </h:form>
                 </div>
                 <div class="ButtonDiv">
-                    <h:form>
-                        Yetki Id: <h:inputText readonly="true" value="#{AdminPage_Perms.currentPerm.permId}"></h:inputText> <br> </br>
-                        Yetki Adı: <h:inputText value="#{AdminPage_Perms.currentPerm.permName}" required="true"></h:inputText> <br> </br>
-                        Sayfa Linki: <h:inputText value="#{AdminPage_Perms.currentPerm.permLink}" required="true"></h:inputText> <br> </br>
-                        <h:commandButton class="btn btn-primary" value="Kaydet" action="#{AdminPage_Perms.UpdatePerm()}"/>
-                        <h:commandButton class="btn btn-danger" value="Sil" onclick="if (!confirm('Yetki Silinecek?') ) { return false;}; return true; " action="#{AdminPage_Perms.DeletePerm()}"/>
-                    </h:form>
+                  
+                    
                 </div>
                 
                 

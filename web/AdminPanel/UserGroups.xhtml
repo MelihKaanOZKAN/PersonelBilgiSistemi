@@ -70,25 +70,21 @@
                 <div class="FormDiv">
                        
                     
-                    <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_Perms.permList}"  var="perm">
+                    <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_UserGroups.permGroupList}"  var="grp">
                             <h:column>
                             <f:facet name="header">ID</f:facet>
-                                #{perm.permId}
+                                #{grp.groupId}
                              </h:column>
                              <h:column>
-                            <f:facet name="header">Yetki Adı</f:facet>
-                                #{perm.permName}
-                             </h:column>
-                            <h:column>
-                            <f:facet name="header">Sayfa Linki</f:facet>
-                                #{perm.permLink}
+                            <f:facet name="header">Grup Adı</f:facet>
+                                #{grp.groupName}
                              </h:column>
                                <h:column>
                                    <center>
                                 <f:facet name="header">İşlemler</f:facet>
                                 <div class="btn-group">
                                     <h:form>
-                                         <h:commandButton class="btn btn-info" action="#{AdminPage_Perms.setCurrentPerm(perm)}" value="Düzenle"></h:commandButton>
+                                        <h:commandButton class="btn btn-info" action="#{AdminPage_UserGroups.setCurrent(grp)}" value="Düzenle"></h:commandButton>
                                     </h:form>
                                 </div>
                                    </center>
@@ -98,11 +94,10 @@
                 </div>
                 <div class="ButtonDiv">
                     <h:form>
-                        Yetki Id: <h:inputText readonly="true" value="#{AdminPage_Perms.currentPerm.permId}"></h:inputText> <br> </br>
-                        Yetki Adı: <h:inputText value="#{AdminPage_Perms.currentPerm.permName}" required="true"></h:inputText> <br> </br>
-                        Sayfa Linki: <h:inputText value="#{AdminPage_Perms.currentPerm.permLink}" required="true"></h:inputText> <br> </br>
-                        <h:commandButton class="btn btn-primary" value="Kaydet" action="#{AdminPage_Perms.UpdatePerm()}"/>
-                        <h:commandButton class="btn btn-danger" value="Sil" onclick="if (!confirm('Yetki Silinecek?') ) { return false;}; return true; " action="#{AdminPage_Perms.DeletePerm()}"/>
+                        Grup Id: <h:inputText readonly="true" value="#{AdminPage_UserGroups.current.groupId}"></h:inputText> <br> </br>
+                        Grup Adı: <h:inputText value="#{AdminPage_UserGroups.current.groupName}" required="true"></h:inputText> <br> </br>
+                        <h:commandButton class="btn btn-primary" value="Kaydet" action="#{AdminPage_UserGroups.UpdateGroup()}"/>
+                        <h:commandButton class="btn btn-danger" value="Sil" onclick="if (!confirm('Grup Silinecek?') ) { return false;}; return true; " action="#{AdminPage_UserGroups.DeleteGroup()}"/>
                     </h:form>
                 </div>
                 

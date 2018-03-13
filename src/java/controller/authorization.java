@@ -67,6 +67,13 @@ public class authorization implements Serializable {
                     result =  "Sablon";
                     view.view(info);
             }
+            if(!info.authStatus)
+            {
+                WrongPass =true;
+            }
+            else{
+                WrongPass =false;
+            }
         } catch (Exception ex)
         {
            ex.printStackTrace();

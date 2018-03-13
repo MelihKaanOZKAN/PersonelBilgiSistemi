@@ -35,5 +35,4 @@ public class Perms_Perm {
     public void setPermLink(String PermLink) {
         this.PermLink = PermLink;
     }
-    
 }

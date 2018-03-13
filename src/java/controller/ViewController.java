@@ -9,6 +9,7 @@ import entity.LoginUserInfo;
 import entity.Perms;
 import Util.ConnectionClass;
 import com.mysql.jdbc.PreparedStatement;
+import entity.Perms_Perm;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,9 +46,9 @@ public class ViewController {
             perm.clear();
             while (user.UserPerms.next()) {
                 Perms perm1 = new Perms(); 
-                
-                perm1.setPermName(user.UserPerms.getString("PermName"));
-                perm1.setPermLink(user.UserPerms.getString("PermLink"));
+                perm1.setPerm(new Perms_Perm());
+                perm1.getPerm().setPermName(user.UserPerms.getString("PermName"));
+                perm1.getPerm().setPermLink(user.UserPerms.getString("PermLink"));
                 perm1.setPermVisual(user.UserPerms.getBoolean("PermVisual"));
                 perm1.setPermSet(user.UserPerms.getBoolean("PermSet"));
                 perm.add(perm1);
