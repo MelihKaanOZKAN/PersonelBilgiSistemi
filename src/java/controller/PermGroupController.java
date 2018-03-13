@@ -27,6 +27,11 @@ public class PermGroupController implements Serializable {
         return current;
     }
 
+    public String ChangeGroupPerms(Perms_PermGroup selected)
+    {
+        current = selected;
+        return "/AdminPanel/UserGroupPerms.xhtml";
+    }
     public void setCurrent(Perms_PermGroup current) {
         this.current = current;
     }

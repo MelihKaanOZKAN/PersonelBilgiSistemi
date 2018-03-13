@@ -84,7 +84,8 @@
                                 <f:facet name="header">İşlemler</f:facet>
                                 <div class="btn-group">
                                     <h:form>
-                                        <h:commandButton class="btn btn-info" action="#{AdminPage_UserGroups.setCurrent(grp)}" value="Düzenle"></h:commandButton>
+                                        <h:commandButton class="btn btn-info" action="#{AdminPage_UserGroups.setCurrent(grp)}" value="Bilgileri Düzenle"></h:commandButton>
+                                        <h:commandLink class="btn btn-info" action="#{AdminPage_UserGroups.ChangeGroupPerms(grp)}" value="Yetkileri Düzenle"></h:commandLink>
                                     </h:form>
                                 </div>
                                    </center>

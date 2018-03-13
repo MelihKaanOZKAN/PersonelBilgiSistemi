@@ -70,7 +70,7 @@
                 <div class="FormDiv">
                        
                     <h:form>
-                    <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_UserGroupPerms.permList}"  var="perm">
+                        <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_UserGroupPerms.getPermList(AdminPage_UserGroups.current)}"  var="perm">
                             <h:column>
                             <f:facet name="header">ID</f:facet>
                                 #{perm.perm.permId}

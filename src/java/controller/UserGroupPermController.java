@@ -25,13 +25,24 @@ public class UserGroupPermController implements Serializable {
     List<Perms> UserGroupList;
     List<Perms> PermList;
     AdminPanel_UserGroupPerms UserGroupPermDao = new AdminPanel_UserGroupPerms();
+    Perms_PermGroup selectedGroup;
+
+    public Perms_PermGroup getSelectedGroup() {
+        return selectedGroup;
+    }
+
+
+    public void setSelectedGroup(Perms_PermGroup selectedGroup) {
+        this.selectedGroup = selectedGroup;
+    }
 
     public Perms getCurrent() {
         return current;
     }
-
-    public List<Perms> getPermList() {
-        PermList = UserGroupPermDao.getPermList();
+    
+    public List<Perms> getPermList(Perms_PermGroup grp) {
+        selectedGroup = grp;
+        PermList = UserGroupPermDao.getPermList(selectedGroup.getGroupId());
         return PermList;
     }
 
