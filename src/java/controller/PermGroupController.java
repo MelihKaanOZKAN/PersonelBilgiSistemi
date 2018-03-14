@@ -22,6 +22,15 @@ public class PermGroupController implements Serializable {
     Perms_PermGroup current = new Perms_PermGroup();
     List<Perms_PermGroup> UserGroupList;
     AdminPanel_PermGroup UserGroupDao = new AdminPanel_PermGroup();
+    Perms_PermGroup currentGroup4Perm = new Perms_PermGroup();
+
+    public Perms_PermGroup getCurrentGroup4Perm() {
+        return currentGroup4Perm;
+    }
+
+    public void setCurrentGroup4Perm(Perms_PermGroup currentGroup4Perm) {
+        this.currentGroup4Perm = currentGroup4Perm;
+    }
     
     public Perms_PermGroup getCurrent() {
         return current;
@@ -29,7 +38,7 @@ public class PermGroupController implements Serializable {
 
     public String ChangeGroupPerms(Perms_PermGroup selected)
     {
-        current = selected;
+        currentGroup4Perm = selected;
         return "/AdminPanel/UserGroupPerms.xhtml";
     }
     public void setCurrent(Perms_PermGroup current) {

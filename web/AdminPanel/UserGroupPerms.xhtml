@@ -70,7 +70,7 @@
                 <div class="FormDiv">
                        
                     <h:form>
-                        <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_UserGroupPerms.getPermList(AdminPage_UserGroups.current)}"  var="perm">
+                        <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_UserGroupPerms.getPermList(AdminPage_UserGroups.currentGroup4Perm)}"  var="perm">
                             <h:column>
                             <f:facet name="header">ID</f:facet>
                                 #{perm.perm.permId}
@@ -81,25 +81,58 @@
                              </h:column>
                                 <h:column>
                             <f:facet name="header">Görüntüle</f:facet>
-                            <h:selectBooleanCheckbox value="#{perm.permVisual}"/>
+                            <h:selectBooleanCheckbox rendered="#{AdminPage_UserGroupPerms.isAddActive(perm)}" value="#{AdminPage_UserGroupPerms.current.permVisual}"/>
                              </h:column>
                               <h:column>
                             <f:facet name="header">Düzenle</f:facet>
-                            <h:selectBooleanCheckbox value="#{perm.permSet}"/>
+                            <h:selectBooleanCheckbox  rendered="#{AdminPage_UserGroupPerms.isAddActive(perm)}" value="#{AdminPage_UserGroupPerms.current.permSet}">
+                                
+                            </h:selectBooleanCheckbox>
                              </h:column>
                                <h:column>
                                    <center>
                                 <f:facet name="header">İşlemler</f:facet>
                                 <div class="btn-group">
-                                        <h:commandButton class="btn btn-info"  value="Yetkiyi Gruba Tanımla"></h:commandButton>
+                                    <h:commandButton rendered="#{AdminPage_UserGroupPerms.isAddActive(perm)}" class="btn btn-info" type="submit" action="#{AdminPage_UserGroupPerms.setPermtoGroup()}" value="Yetkiyi Gruba Tanımla"></h:commandButton>
+                                    <h:commandButton rendered="#{AdminPage_UserGroupPerms.isSelectActive()}" class="btn btn-info" type="submit" action="#{AdminPage_UserGroupPerms.setCurrent(perm)}" value="Yetkiyi Seç"></h:commandButton>
+                              
+                                
+                                </div>
+                                   </center>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <div class="ButtonDiv">
+                  
+                     <h:form>
+                        <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_UserGroupPerms.getUserGroupList(AdminPage_UserGroups.currentGroup4Perm)}"  var="perm">
+                            <h:column>
+                            <f:facet name="header">ID</f:facet>
+                                #{perm.perm.permId}
+                             </h:column>
+                             <h:column>
+                            <f:facet name="header">Yetki Adı</f:facet>
+                                #{perm.perm.permName}
+                             </h:column>
+                                <h:column>
+                            <f:facet name="header">Görüntüle</f:facet>
+                            <h:selectBooleanCheckbox disabled="true" value="#{perm.permVisual}"/>
+                             </h:column>
+                              <h:column>
+                            <f:facet name="header">Düzenle</f:facet>
+                            <h:selectBooleanCheckbox disabled="true" value="#{perm.permSet}"/>
+                             </h:column>
+                               <h:column>
+                                   <center>
+                                <f:facet name="header">İşlemler</f:facet>
+                                <div class="btn-group">
+                                    <h:commandButton class="btn btn-info" type="submit" action="#{AdminPage_UserGroupPerms.deletePermFromGroup(perm)}" value="Yetkiyi Gruptan Sil"></h:commandButton>
                                 </div>
                                    </center>
                             </h:column>
 		   </h:dataTable>
                     </h:form>
-                </div>
-                <div class="ButtonDiv">
-                  
                     
                 </div>
                 

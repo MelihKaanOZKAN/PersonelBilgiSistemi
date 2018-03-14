@@ -5,6 +5,9 @@
  */
 package entity;
 
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ValueChangeEvent;
+
 /**
  *
  * @author Casper
@@ -36,4 +39,5 @@ public class Perms {
     public void setPermSet(boolean permSet) {
         this.permSet = permSet;
     }
+   
 }

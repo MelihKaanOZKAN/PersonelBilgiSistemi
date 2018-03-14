@@ -11,6 +11,7 @@ import entity.Perms;
 import entity.Perms_Perm;
 import entity.Perms_PermGroup;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,25 +22,42 @@ import java.util.List;
 public class AdminPanel_UserGroupPerms {
      ConnectionClass connect = new ConnectionClass();
 
-     public void addPerm2Group(Perms perm)
+     public void addPerm2Group(Perms perm, Perms_PermGroup grp)
      { try{
-            String sql = "SELECT PermId, PermName , PermLink FROM Perms";
+            String sql = "INSERT INTO userPerms (PermissionId, UserTypeId, PermVisual, PermSet) "
+                    + "VALUES (?, ?, ?, ?);";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
-           
+            st.setInt(1, perm.getPerm().getPermId());
+            st.setInt(2, grp.getGroupId());
+            st.setBoolean(3, perm.isPermVisual());
+            st.setBoolean(4, perm.isPermSet());
+            st.executeUpdate();
+            }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+         
+     }
+     
+     public void deletePermFromGroup (Perms perm, Perms_PermGroup grp)
+     { try{
+            String sql = "DELETE FROM userPerms WHERE PermissionId = ? AND UserTypeId = ?";
+            PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
+            st.setInt(1, perm.getPerm().getPermId());
+            st.setInt(2, grp.getGroupId());
+            st.executeUpdate();
             }catch (Exception ex) {
             ex.printStackTrace();
         }
          
      }
      
-     
-     
     public List<Perms> getPermList(int GroupId) {
         List<Perms> result = new ArrayList<Perms>();
         try {
-            String sql = "SELECT PermId, PermName , PermLink FROM Perms P\n" +
-            "left join UserPerms UP on p.PermId = UP.permissionid\n" +
-            "where UP.UserTypeId != ?";
+            String sql = "SELECT PermId, PermName , PermLink FROM Perms P " +
+"            left join UserPerms UP on p.PermId = UP.permissionid " +
+"            and UP.UserTypeId = ? " +
+"            where UP.UserTypeId is null ";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
             st.setInt(1, GroupId);
             ResultSet rs = st.executeQuery();
@@ -59,9 +77,9 @@ public class AdminPanel_UserGroupPerms {
     public List<Perms> getGroupPerms(int GroupId) {
         List<Perms> result = new ArrayList<Perms>();
         try {
-            String sql = "select PermissionId, pr.PermName, PermVisual, PermSet from UserPerms UP\n" +
-            "inner join Perms pr on pr.PermId = UP.PermissionId\n" +
-            "where UP.UserTypeId=?;";
+            String sql = "select PermissionId, pr.PermName, PermVisual, PermSet from UserPerms UP " +
+            "inner join Perms pr on pr.PermId = UP.PermissionId " +
+            "where UP.UserTypeId=?; ";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
             st.setInt(1, GroupId);
             ResultSet rs = st.executeQuery();

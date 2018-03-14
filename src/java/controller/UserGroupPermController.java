@@ -5,7 +5,6 @@
  */
 package controller;
 
-import Dao.AdminPanel_PermGroup;
 import Dao.AdminPanel_UserGroupPerms;
 import entity.Perms;
 import entity.Perms_PermGroup;
@@ -21,12 +20,36 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name="AdminPage_UserGroupPerms")
 @SessionScoped
 public class UserGroupPermController implements Serializable {
-    Perms current = new Perms();
+    Perms current = null;
     List<Perms> UserGroupList;
     List<Perms> PermList;
     AdminPanel_UserGroupPerms UserGroupPermDao = new AdminPanel_UserGroupPerms();
     Perms_PermGroup selectedGroup;
-
+   
+    public boolean isAddActive(Perms perm)
+    {
+        if(current == null)
+        {
+            return false;
+        }
+        else if (current.getPerm().PermId == perm.getPerm().PermId)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean isSelectActive()
+    {
+        if(current == null)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     public Perms_PermGroup getSelectedGroup() {
         return selectedGroup;
     }
@@ -54,7 +77,9 @@ public class UserGroupPermController implements Serializable {
         this.current = current;
     }
 
-    public List<Perms> getUserGroupList() {
+    public List<Perms> getUserGroupList(Perms_PermGroup grp) {
+        selectedGroup = grp;
+        UserGroupList = UserGroupPermDao.getGroupPerms(selectedGroup.getGroupId());
         return UserGroupList;
     }
 
@@ -62,5 +87,16 @@ public class UserGroupPermController implements Serializable {
         this.UserGroupList = UserGroupList;
     }
     
+    public void setPermtoGroup()
+    {
+        UserGroupPermDao.addPerm2Group(current, selectedGroup);
+        current=null;
+        PermList = null;
+    }
+    public void deletePermFromGroup(Perms perm)
+    {
+        UserGroupPermDao.deletePermFromGroup(perm, selectedGroup);
+    }
     
+   
 }
