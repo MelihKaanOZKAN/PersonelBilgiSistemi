@@ -5,7 +5,7 @@
  */
 package entity;
 
-import java.sql.ResultSet;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -20,7 +20,7 @@ public class LoginUserInfo {
     public int PersonInfoId;
     public int UserType;
     public int UserId;
-    public ResultSet UserPerms;
+    public List<Perms> UserPerms;
     public String username, password, Name, Surname, CitizenNumber;
 
     public String getCitizenNumber() {
@@ -79,13 +79,14 @@ public class LoginUserInfo {
         this.UserId = UserId;
     }
 
-    public ResultSet getUserPerms() {
+    public List<Perms> getUserPerms() {
         return UserPerms;
     }
 
-    public void setUserPerms(ResultSet UserPerms) {
+    public void setUserPerms(List<Perms> UserPerms) {
         this.UserPerms = UserPerms;
     }
+
 
     public String getUsername() {
         return username;
