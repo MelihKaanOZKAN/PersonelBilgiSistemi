@@ -42,7 +42,7 @@ public class authorization implements Serializable {
         info = auth.getAuthorize(info);
         if(info.isAuthStatus())
         {
-            result = "Sablon";
+            result = "main";
         }
         else {
                 WrongPass=!info.isAuthStatus();
@@ -54,7 +54,7 @@ public class authorization implements Serializable {
     {
          FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
          info = new LoginUserInfo();
-         return "/index.xhtml";
+         return "index";
     }
     public boolean isWrongPass() {
         return WrongPass;

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="title">
+       Ana Sayfa
+    </ui:define>
+
+    <ui:define name="content">
+        <h:dataTable class="table table-striped" value="#{Annons.getAnnonsList(auth.info.userType)}" var="a">
+        
+            <h:column class="table table-hover table-responsive">
+               <f:facet name="header">Duyurular</f:facet>
+                        #{a.text}
+             </h:column>
+        </h:dataTable>
+    </ui:define>
+
+</ui:composition>
