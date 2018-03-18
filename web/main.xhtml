@@ -10,9 +10,9 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:dataTable class="table table-striped" value="#{Annons.getAnnonsList(auth.info.userType)}" var="a">
+        <h:dataTable class="table table-striped" value="#{Annons.getAnnonsList(auth.info.user.userType.groupId)}" var="a">
         
-            <h:column class="table table-hover table-responsive">
+            <h:column class="table table-hover">
                <f:facet name="header">Duyurular</f:facet>
                         #{a.text}
              </h:column>

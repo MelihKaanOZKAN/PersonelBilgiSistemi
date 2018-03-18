@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="title">
+        Kullanıcılar
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="FormDiv">
+
+
+            <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_Users.getUserList(AdminPage_UserGroups.currentGroup4Perm)}"  var="user">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                        #{user.userId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Kullanıcı Adı</f:facet>
+                        #{user.userName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Kullanıcı Grubu</f:facet>
+                        #{user.userType.groupName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">İsim ve Soyisim</f:facet>
+                        #{user.getuserinfo().EName}  #{user.getuserinfo().ESurname}
+                </h:column>
+                <h:column>
+                    <center>
+                        <f:facet name="header">İşlemler</f:facet>
+                        <div class="btn-group">
+                            <h:form>
+                                <h:commandButton class="btn btn-info" action="#{AdminPage_Users.setSelectedUser(user)}" value="Kullanıcıyı Seç"></h:commandButton>
+                            </h:form>
+                        </div>
+                    </center>
+
+                </h:column>
+            </h:dataTable>
+        </div>
+        <div class="ButtonDiv">
+            <h:form>
+                <h:outputText class="formText" value="Kullanıcı ID:"/>
+                <h:inputText readonly="true" class="form-control" value="#{AdminPage_Users.selectedUser.userId}" /><br></br>
+                <h:outputText class="formText" value="Kimlik Numarası:"/> 
+                <h:inputText class="form-control" value="#{AdminPage_Users.selectedUser.getuserinfo().citizensShipNumber}" /> 
+                <h:commandButton class="btn btn-primary" type="submit" action="#{AdminPage_Users.findUser()}" value="Kişi Bilgisi Getir"/>
+                <br></br>
+                <h:outputText class="formText" value="Adı:"/> 
+                <h:inputText readonly="true" class="form-control" value="#{AdminPage_Users.selectedUser.getuserinfo().EName}"/><br></br>
+                <h:outputText class="formText" value="Soyad:"/>
+                <h:inputText readonly="true" class="form-control" value="#{AdminPage_Users.selectedUser.getuserinfo().ESurname}"/><br></br>
+                <h:outputText class="formText" value="Kullanıcı Adı:"/> 
+                <h:inputText class="form-control" value="#{AdminPage_Users.selectedUser.userName}"/><br></br>
+            <h:outputText class="formText" value="Şifresi:"/> 
+            <h:inputSecret class="form-control" value="#{AdminPage_Users.selectedUser.password}"/><br></br>
+            <h:commandButton class="btn btn-success"  type="submit" action="#{AdminPage_Users.addUpdate()}" value="Kaydet"/>
+            <h:commandButton class="btn btn-danger"  value="Sil" onclick="if (!confirm('Kullanıcı Silinecek?')) {
+                                    return false;
+                                }
+                                ;
+                                return true;
+                             " action="#{AdminPage_Users.deleteUser()}"/>
+            </h:form>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

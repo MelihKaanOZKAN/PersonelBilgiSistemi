@@ -24,20 +24,20 @@ public class Authoration {
             PreparedStatement  stm = (PreparedStatement) connect.connection.prepareStatement("SELECT UserType, UserId, PersonId, EName, ESurname, CitizensShipNumber FROM Users U "
                     + "inner join PErsonalInfo PI on PI.PInfoId = U.PersonId "
                     + " WHERE Username=? AND Password=?");
-            stm.setString(1,info.username);
-            stm.setString(2,info.password);
+            stm.setString(1,info.getUser().getUserName());
+            stm.setString(2,info.getUser().getPassword());
             ResultSet rs = stm.executeQuery();
             
             while(rs.next())
             {
                     stm.clearParameters();
-                    info.authStatus = true;
-                    info.UserType = rs.getInt(1);
-                    info.UserId = rs.getInt(2);
-                    info.PersonInfoId = rs.getInt(3);
-                    info.Name = rs.getString(4);
-                    info.Surname = rs.getString(5);
-                    info.CitizenNumber = rs.getString(6);
+                    info.setAuthStatus(true);
+                    info.getUser().getUserType().setGroupId(rs.getInt(1));
+                    info.getUser().setUserId(rs.getInt(2));
+                    info.getUser().getuserinfo().setPInfoId(rs.getInt(2));
+                    info.getUser().getuserinfo().setEName(rs.getString(4));
+                    info.getUser().getuserinfo().setESurname(rs.getString(5));
+                    info.getUser().getuserinfo().setCitizensShipNumber(rs.getString(6));
                     info.setUserPerms(permDao.getUserPerms(info));
             }
         } catch (Exception ex)

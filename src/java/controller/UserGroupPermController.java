@@ -7,7 +7,7 @@ package controller;
 
 import Dao.AdminPanel_UserGroupPerms;
 import entity.Perms;
-import entity.Perms_PermGroup;
+import entity.UserGroup;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -24,7 +24,7 @@ public class UserGroupPermController implements Serializable {
     List<Perms> UserGroupList;
     List<Perms> PermList;
     AdminPanel_UserGroupPerms UserGroupPermDao = new AdminPanel_UserGroupPerms();
-    Perms_PermGroup selectedGroup;
+    UserGroup selectedGroup;
    
     public boolean isAddActive(Perms perm)
     {
@@ -50,12 +50,12 @@ public class UserGroupPermController implements Serializable {
             return false;
         }
     }
-    public Perms_PermGroup getSelectedGroup() {
+    public UserGroup getSelectedGroup() {
         return selectedGroup;
     }
 
 
-    public void setSelectedGroup(Perms_PermGroup selectedGroup) {
+    public void setSelectedGroup(UserGroup selectedGroup) {
         this.selectedGroup = selectedGroup;
     }
 
@@ -63,7 +63,7 @@ public class UserGroupPermController implements Serializable {
         return current;
     }
     
-    public List<Perms> getPermList(Perms_PermGroup grp) {
+    public List<Perms> getPermList(UserGroup grp) {
         selectedGroup = grp;
         PermList = UserGroupPermDao.getPermList(selectedGroup.getGroupId());
         return PermList;
@@ -77,7 +77,7 @@ public class UserGroupPermController implements Serializable {
         this.current = current;
     }
 
-    public List<Perms> getUserGroupList(Perms_PermGroup grp) {
+    public List<Perms> getUserGroupList(UserGroup grp) {
         selectedGroup = grp;
         UserGroupList = UserGroupPermDao.getGroupPerms(selectedGroup.getGroupId());
         return UserGroupList;

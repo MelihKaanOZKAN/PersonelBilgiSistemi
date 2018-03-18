@@ -1,15 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Dao;
 
 import Util.ConnectionClass;
 import com.mysql.jdbc.PreparedStatement;
 import entity.Perms;
 import entity.Perms_Perm;
-import entity.Perms_PermGroup;
+import entity.UserGroup;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +17,7 @@ import java.util.List;
 public class AdminPanel_PermGroup {
      ConnectionClass connect = new ConnectionClass();
 
-    public void AddGroup(Perms_PermGroup group) {
+    public void AddGroup(UserGroup group) {
         try {
             String sql = "INSERT INTO UserTypes (TypeName) VALUES(?)";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
@@ -32,7 +28,7 @@ public class AdminPanel_PermGroup {
         }
     }
 
-    public void UpdateGroup(Perms_PermGroup group) {
+    public void UpdateGroup(UserGroup group) {
         try {
             String sql = "UPDATE UserTypes SET TypeName = ? WHERE UserTypeId=?";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
@@ -44,7 +40,7 @@ public class AdminPanel_PermGroup {
         }
     }
 
-    public void DeleteGroup(Perms_PermGroup group) {
+    public void DeleteGroup(UserGroup group) {
         try {
             String sql = "DELETE FROM UserTypes WHERE UserTypeId=?";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
@@ -55,14 +51,14 @@ public class AdminPanel_PermGroup {
         }
     }
 
-    public List<Perms_PermGroup> getGroupList() {
-        List<Perms_PermGroup> result = new ArrayList<Perms_PermGroup>();
+    public List<UserGroup> getGroupList() {
+        List<UserGroup> result = new ArrayList<UserGroup>();
         try {
             String sql = "SELECT UserTypeId, TypeName FROM UserTypes";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Perms_PermGroup tmp = new Perms_PermGroup();
+                UserGroup tmp = new UserGroup();
                 tmp.setGroupId(rs.getInt(1));
                 tmp.setGroupName(rs.getString(2));
                 result.add(tmp);

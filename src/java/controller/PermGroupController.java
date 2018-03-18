@@ -6,7 +6,7 @@
 package controller;
 
 import Dao.AdminPanel_PermGroup;
-import entity.Perms_PermGroup;
+import entity.UserGroup;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -19,38 +19,43 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name="AdminPage_UserGroups")
 @SessionScoped
 public class PermGroupController implements Serializable {
-    Perms_PermGroup current = new Perms_PermGroup();
-    List<Perms_PermGroup> UserGroupList;
+    UserGroup current = new UserGroup();
+    List<UserGroup> UserGroupList;
     AdminPanel_PermGroup UserGroupDao = new AdminPanel_PermGroup();
-    Perms_PermGroup currentGroup4Perm = new Perms_PermGroup();
+    UserGroup currentGroup4Perm = new UserGroup();
 
-    public Perms_PermGroup getCurrentGroup4Perm() {
+    public UserGroup getCurrentGroup4Perm() {
         return currentGroup4Perm;
     }
 
-    public void setCurrentGroup4Perm(Perms_PermGroup currentGroup4Perm) {
+    public void setCurrentGroup4Perm(UserGroup currentGroup4Perm) {
         this.currentGroup4Perm = currentGroup4Perm;
     }
     
-    public Perms_PermGroup getCurrent() {
+    public UserGroup getCurrent() {
         return current;
     }
 
-    public String ChangeGroupPerms(Perms_PermGroup selected)
+    public String ChangeGroupPerms(UserGroup selected)
     {
         currentGroup4Perm = selected;
         return "/AdminPanel/UserGroupPerms.xhtml";
     }
-    public void setCurrent(Perms_PermGroup current) {
+    public String UsersAddDelete(UserGroup selected)
+    {
+        currentGroup4Perm = selected;
+        return "/AdminPanel/Users.xhtml";
+    }
+    public void setCurrent(UserGroup current) {
         this.current = current;
     }
 
-    public List<Perms_PermGroup> getPermGroupList() {
+    public List<UserGroup> getPermGroupList() {
         UserGroupList = UserGroupDao.getGroupList();
         return UserGroupList;
     }
 
-    public void setPermGroupList(List<Perms_PermGroup> PermGroupList) {
+    public void setPermGroupList(List<UserGroup> PermGroupList) {
         this.UserGroupList = UserGroupList;
     }
     
@@ -63,12 +68,12 @@ public class PermGroupController implements Serializable {
         else{
             UserGroupDao.AddGroup(current);
         }
-        current = new Perms_PermGroup();
+        current = new UserGroup();
     }
     public void DeleteGroup()
     {
        UserGroupDao.DeleteGroup(current);
-        current = new Perms_PermGroup();
+        current = new UserGroup();
     }
     
 }

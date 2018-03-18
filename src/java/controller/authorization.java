@@ -54,7 +54,7 @@ public class authorization implements Serializable {
     {
          FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
          info = new LoginUserInfo();
-         return "index";
+         return  "/index?faces-redirect=true";
     }
     public boolean isWrongPass() {
         return WrongPass;

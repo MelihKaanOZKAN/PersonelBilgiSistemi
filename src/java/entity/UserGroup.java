@@ -9,10 +9,10 @@ package entity;
  *
  * @author Casper
  */
-public class Perms_PermGroup {
+public class UserGroup {
     private int GroupId;
    private String GroupName;
-
+   
     public int getGroupId() {
         return GroupId;
     }

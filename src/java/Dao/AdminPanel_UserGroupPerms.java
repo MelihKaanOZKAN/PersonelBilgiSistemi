@@ -9,7 +9,7 @@ import Util.ConnectionClass;
 import com.mysql.jdbc.PreparedStatement;
 import entity.Perms;
 import entity.Perms_Perm;
-import entity.Perms_PermGroup;
+import entity.UserGroup;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.List;
 public class AdminPanel_UserGroupPerms {
      ConnectionClass connect = new ConnectionClass();
 
-     public void addPerm2Group(Perms perm, Perms_PermGroup grp)
+     public void addPerm2Group(Perms perm, UserGroup grp)
      { try{
             String sql = "INSERT INTO userPerms (PermissionId, UserTypeId, PermVisual, PermSet) "
                     + "VALUES (?, ?, ?, ?);";
@@ -38,7 +38,7 @@ public class AdminPanel_UserGroupPerms {
          
      }
      
-     public void deletePermFromGroup (Perms perm, Perms_PermGroup grp)
+     public void deletePermFromGroup (Perms perm, UserGroup grp)
      { try{
             String sql = "DELETE FROM userPerms WHERE PermissionId = ? AND UserTypeId = ?";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);

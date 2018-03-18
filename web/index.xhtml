@@ -6,21 +6,21 @@
 <head>
 <meta charset="utf-8"/>
 <title>Giriş Sayfası</title>
-	<link rel="stylesheet" href="css/stil_Login.css"/>
+	<link rel="stylesheet" href="resources/css/stil_Login.css"/>
 </head>
 
-<body background="img/backgorund-login.jpg">
+<body background="resources/img/backgorund-login.jpg">
 	
   <div class="outer-box">
     <div class="login-box">
       <h3><font class="text">Personel Giriş Paneli</font></h3>
       <center>
        <h:form>
-      <h:inputText class="input" value="#{auth.info.username}" a:placeholder="Kullanıcı Adı"/>
-      <h:inputSecret class="input" value="#{auth.info.password}" a:placeholder="Şifre"/>
+           <h:inputText class="input" value="#{auth.info.user.userName}" a:placeholder="Kullanıcı Adı"/>
+           <h:inputSecret class="input" value="#{auth.info.user.password}" a:placeholder="Şifre"/>
       <h:commandButton class="btn-login" type="submit" action="#{auth.getAuthorized()}" value="Giriş Yap"/>
       </h:form>
-          <h:panelGroup class="user_error" rendered="#{auth.wrongPass}">Kullanıcı Adı ve Şifre Hatalı!</h:panelGroup>
+          <h:panelGroup class="user_error" rendered="#{auth.wrongPass}"><h:outputText value="Kullanıcı Adı ve Şifre Hatalı!"/></h:panelGroup>
       </center>
     </div>
   </div>

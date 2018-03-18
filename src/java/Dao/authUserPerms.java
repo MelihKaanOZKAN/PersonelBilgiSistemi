@@ -26,8 +26,8 @@ public class authUserPerms {
             ConnectionClass connect = new ConnectionClass();
             PreparedStatement stm = (PreparedStatement) connect.connection.prepareStatement("SELECT P.PermId, P.PermName, P.PermLink, PermVisual, PermSet FROM UserPerms UP  "
                     + "INNER JOIN Perms P ON P.PermId = UP.PermissionId "
-                    + "INNER JOIN Users U ON U.UserType=UP.UserTypeId AND U.PersonId=?");
-            stm.setInt(1, info.PersonInfoId);
+                    + "INNER JOIN Users U ON U.UserType=UP.UserTypeId AND U.UserId=?");
+            stm.setInt(1, info.getUser().getUserId());
             
             ResultSet rs = stm.executeQuery();
             while(rs.next())
