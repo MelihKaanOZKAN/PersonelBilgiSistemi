@@ -10,8 +10,9 @@
     </ui:define>
 
     <ui:define name="content">
+        <div style="float:left">
         <h:form>
-            <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_UserGroupPerms.getPermList(AdminPage_UserGroups.currentGroup4Perm)}"  var="perm">
+            <h:dataTable class="table table-striped" border="1" width="600"  value="#{AdminPage_UserGroupPerms.getPermList(AdminPage_UserGroups.currentGroup4Perm)}"  var="perm">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                         #{perm.perm.permId}
@@ -43,10 +44,10 @@
                 </h:column>
             </h:dataTable>
         </h:form>
-        <div class="ButtonDiv">
-
+        </div>
+        <div style="margin-left: 25px; float:left">
             <h:form>
-                <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_UserGroupPerms.getUserGroupList(AdminPage_UserGroups.currentGroup4Perm)}"  var="perm">
+                <h:dataTable class="table table-dark table-striped" border="1" width="600"  value="#{AdminPage_UserGroupPerms.getUserGroupList(AdminPage_UserGroups.currentGroup4Perm)}"  var="perm">
                     <h:column>
                         <f:facet name="header">ID</f:facet>
                             #{perm.perm.permId}

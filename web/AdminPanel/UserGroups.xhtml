@@ -13,7 +13,7 @@
         <div class="FormDiv">
 
 
-            <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_UserGroups.permGroupList}"  var="grp">
+            <h:dataTable border="1" width="600" value="#{AdminPage_UserGroups.permGroupList}"  var="grp">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                         #{grp.groupId}
@@ -29,7 +29,7 @@
                             <h:form>
                                 <h:commandButton class="btn btn-info" action="#{AdminPage_UserGroups.setCurrent(grp)}" value="Bilgileri Düzenle"></h:commandButton>
                                 <h:commandLink class="btn btn-info" action="#{AdminPage_UserGroups.ChangeGroupPerms(grp)}" value="Yetkileri Düzenle"></h:commandLink>
-                                 <h:commandLink class="btn btn-info" action="#{AdminPage_UserGroups.UsersAddDelete(grp)}" value="Kullanıcı Ekle/Sil"></h:commandLink>
+                                <h:commandLink class="btn btn-info" action="#{AdminPage_UserGroups.UsersAddDelete(grp)}" value="Kullanıcı Ekle/Sil"></h:commandLink>
                             </h:form>
                         </div>
                     </center>
@@ -38,17 +38,20 @@
             </h:dataTable>
         </div>
         <div class="ButtonDiv">
-            <h:form>
-                Grup Id: <h:inputText readonly="true" value="#{AdminPage_UserGroups.current.groupId}"></h:inputText> <br> </br>
-                Grup Adı: <h:inputText value="#{AdminPage_UserGroups.current.groupName}" required="true"></h:inputText> <br> </br>
-                <h:commandButton class="btn btn-primary" value="Kaydet" action="#{AdminPage_UserGroups.UpdateGroup()}"/>
-                <h:commandButton class="btn btn-danger" value="Sil" onclick="if (!confirm('Grup Silinecek?')) {
-                                    return false;
-                                }
-                                ;
-                                return true;
-                                " action="#{AdminPage_UserGroups.DeleteGroup()}"/>
-            </h:form>
+            <table class="table">
+                <h:form>
+                    Grup Id: <h:inputText readonly="true" value="#{AdminPage_UserGroups.current.groupId}"></h:inputText> <br> </br>
+                    Grup Adı: <h:inputText value="#{AdminPage_UserGroups.current.groupName}" required="true"></h:inputText> <br> </br>
+                    <h:commandButton class="btn btn-primary" value="Kaydet" action="#{AdminPage_UserGroups.UpdateGroup()}"/>
+                    <h:commandButton class="btn btn-danger" value="Sil" onclick="if (!confirm('Grup Silinecek?')) {
+                            return false;
+                        }
+                        ;
+                        return true;
+                                     " action="#{AdminPage_UserGroups.DeleteGroup()}"/>
+                </h:form>
+            </table>
+
         </div>
 
     </ui:define>

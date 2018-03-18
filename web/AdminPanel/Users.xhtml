@@ -13,7 +13,7 @@
         <div class="FormDiv">
 
 
-            <h:dataTable border="1" width="600" bgcolor="SteelBlue" value="#{AdminPage_Users.getUserList(AdminPage_UserGroups.currentGroup4Perm)}"  var="user">
+            <h:dataTable border="1" width="600" value="#{AdminPage_Users.getUserList(AdminPage_UserGroups.currentGroup4Perm)}"  var="user">
                 <h:column>
                     <f:facet name="header">ID</f:facet>
                         #{user.userId}
@@ -45,27 +45,44 @@
         </div>
         <div class="ButtonDiv">
             <h:form>
-                <h:outputText class="formText" value="Kullanıcı ID:"/>
-                <h:inputText readonly="true" class="form-control" value="#{AdminPage_Users.selectedUser.userId}" /><br></br>
-                <h:outputText class="formText" value="Kimlik Numarası:"/> 
-                <h:inputText class="form-control" value="#{AdminPage_Users.selectedUser.getuserinfo().citizensShipNumber}" /> 
-                <h:commandButton class="btn btn-primary" type="submit" action="#{AdminPage_Users.findUser()}" value="Kişi Bilgisi Getir"/>
-                <br></br>
-                <h:outputText class="formText" value="Adı:"/> 
-                <h:inputText readonly="true" class="form-control" value="#{AdminPage_Users.selectedUser.getuserinfo().EName}"/><br></br>
-                <h:outputText class="formText" value="Soyad:"/>
-                <h:inputText readonly="true" class="form-control" value="#{AdminPage_Users.selectedUser.getuserinfo().ESurname}"/><br></br>
-                <h:outputText class="formText" value="Kullanıcı Adı:"/> 
-                <h:inputText class="form-control" value="#{AdminPage_Users.selectedUser.userName}"/><br></br>
-            <h:outputText class="formText" value="Şifresi:"/> 
-            <h:inputSecret class="form-control" value="#{AdminPage_Users.selectedUser.password}"/><br></br>
-            <h:commandButton class="btn btn-success"  type="submit" action="#{AdminPage_Users.addUpdate()}" value="Kaydet"/>
-            <h:commandButton class="btn btn-danger"  value="Sil" onclick="if (!confirm('Kullanıcı Silinecek?')) {
-                                    return false;
-                                }
-                                ;
-                                return true;
-                             " action="#{AdminPage_Users.deleteUser()}"/>
+            
+                    <div class="form-group">
+                        <h:outputText class="formText" value="Kullanıcı ID:"/>
+                        <h:inputText readonly="true" class="form-control" value="#{AdminPage_Users.selectedUser.userId}" />
+                    </div>
+                    <div class="form-group">
+                        <h:outputText class="formText" value="Kimlik Numarası:"/> 
+                        <h:inputText class="form-control" value="#{AdminPage_Users.selectedUser.getuserinfo().citizensShipNumber}" /> 
+                        <h:commandButton class="btn btn-primary" type="submit" action="#{AdminPage_Users.findUser()}" value="Kişi Bilgisi Getir"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputText class="formText" value="Adı:"/> 
+                        <h:inputText readonly="true" class="form-control" value="#{AdminPage_Users.selectedUser.getuserinfo().EName}"/>
+
+                    </div>
+                    <div class="form-group">
+                        <h:outputText class="formText" value="Soyad:"/>
+                        <h:inputText readonly="true" class="form-control" value="#{AdminPage_Users.selectedUser.getuserinfo().ESurname}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputText class="formText" value="Kullanıcı Adı:"/> 
+                        <h:inputText class="form-control" value="#{AdminPage_Users.selectedUser.userName}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputText class="formText" value="Şifresi:"/> 
+                        <h:inputSecret class="form-control" value="#{AdminPage_Users.selectedUser.password}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:commandButton class="btn btn-success btnproperties"  type="submit" action="#{AdminPage_Users.addUpdate()}" value="Kaydet"/>
+                        <h:commandButton class="btn btn-danger btnproperties"  value="Sil" onclick="if (!confirm('Kullanıcı Silinecek?')) {
+                            return false;
+                        }
+                        ;
+                        return true;
+                                         " action="#{AdminPage_Users.deleteUser()}"/>
+                        <h:commandButton class="btn btn-info btnproperties" value="Formu Temizle" action="#{AdminPage_Users.clearForm()}"/>
+                    </div>
+
             </h:form>
         </div>
 

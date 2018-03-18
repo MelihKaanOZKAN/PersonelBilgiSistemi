@@ -85,4 +85,7 @@ public class UserController {
     public boolean isButtonsactive() {
         return selectedUser.getuserinfo().getEName().equals("");
     }
+    public void clearForm(){
+        selectedUser = new User();
+    }
 }
