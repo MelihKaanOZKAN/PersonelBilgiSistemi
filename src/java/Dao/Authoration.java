@@ -16,7 +16,7 @@ import java.sql.ResultSet;
  */
 public class Authoration {
     
-    authUserPerms permDao = new authUserPerms();
+    AdminPanel_UserGroupPerms groupPermDao = new AdminPanel_UserGroupPerms();
     public LoginUserInfo getAuthorize(LoginUserInfo info){
 
           try{
@@ -38,7 +38,7 @@ public class Authoration {
                     info.getUser().getuserinfo().setEName(rs.getString(4));
                     info.getUser().getuserinfo().setESurname(rs.getString(5));
                     info.getUser().getuserinfo().setCitizensShipNumber(rs.getString(6));
-                    info.getUser().getUserType().setGroupPerms(permDao.getUserPerms(info));
+                    info.getUser().setUserType(groupPermDao.getGroupPerms(info.getUser().getUserType()));
             }
         } catch (Exception ex)
         {

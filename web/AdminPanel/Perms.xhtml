@@ -17,6 +17,12 @@
                     <f:facet name="header">ID</f:facet>
                         #{perm.permId}
                 </h:column>
+                  <h:column headerClass="thead-dark">
+                    <f:facet name="header"> 
+                        <h:outputText class="thead-dark" value="Ekran Kodu:"/>
+                    </f:facet>
+                      <h:outputText value="#{perm.screenCode}" />
+                </h:column>
                 <h:column headerClass="thead-dark">
                     <f:facet name="header"> 
                         <h:outputText class="thead-dark" value="Yetki Adı"/>
@@ -43,6 +49,7 @@
         <div class="ButtonDiv">
             <h:form>
                 Yetki Id: <h:inputText readonly="true" value="#{AdminPage_Perms.currentPerm.permId}"></h:inputText> <br> </br>
+                Ekran kodu: <h:inputText value="#{AdminPage_Perms.currentPerm.screenCode}" required="true"></h:inputText> <br> </br>
                 Yetki Adı: <h:inputText value="#{AdminPage_Perms.currentPerm.permName}" required="true"></h:inputText> <br> </br>
                 Sayfa Linki: <h:inputText value="#{AdminPage_Perms.currentPerm.permLink}" required="true"></h:inputText> <br> </br>
                 <h:commandButton class="btn btn-primary" value="Kaydet" action="#{AdminPage_Perms.UpdatePerm()}"/>

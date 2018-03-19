@@ -20,11 +20,11 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name="AdminPage_UserGroupPerms")
 @SessionScoped
 public class UserGroupPermController implements Serializable {
-    Perms current = null;
-    List<UserGroup> UserGroupList;
-    List<Perms> PermList;
-    AdminPanel_UserGroupPerms UserGroupPermDao = new AdminPanel_UserGroupPerms();
-    UserGroup selectedGroup;
+   private Perms current = null;
+   private List<UserGroup> UserGroupList;
+   private List<Perms> PermList;
+   private AdminPanel_UserGroupPerms UserGroupPermDao = new AdminPanel_UserGroupPerms();
+   private UserGroup selectedGroup;
    
     public boolean isAddActive(Perms perm)
     {

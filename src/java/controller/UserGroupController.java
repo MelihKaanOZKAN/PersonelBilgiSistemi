@@ -23,7 +23,15 @@ public class UserGroupController implements Serializable {
     List<UserGroup> UserGroupList;
     AdminPanel_UserGroup UserGroupDao = new AdminPanel_UserGroup();
     UserGroup currentGroup4Perm = new UserGroup();
+    private String ScreenCode = "AKG";
 
+    public String getScreenCode() {
+        return ScreenCode;
+    }
+
+    public void setScreenCode(String ScreenCode) {
+        this.ScreenCode = ScreenCode;
+    }
     public UserGroup getCurrentGroup4Perm() {
         return currentGroup4Perm;
     }

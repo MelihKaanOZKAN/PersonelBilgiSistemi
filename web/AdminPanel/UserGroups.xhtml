@@ -22,7 +22,7 @@
                     <f:facet name="header">Grup Adı</f:facet>
                         #{grp.groupName}
                 </h:column>
-                <h:column>
+                <h:column rendered="#{auth.isAuthorized2Set(AdminPage_UserGroups.screenCode)}">
                     <center>
                         <f:facet name="header">İşlemler</f:facet>
                         <div class="btn-group">
@@ -39,7 +39,7 @@
         </div>
         <div class="ButtonDiv">
             <table class="table">
-                <h:form>
+                <h:form rendered="#{auth.isAuthorized2Set(AdminPage_UserGroups.screenCode)}">
                     Grup Id: <h:inputText readonly="true" value="#{AdminPage_UserGroups.current.groupId}"></h:inputText> <br> </br>
                     Grup Adı: <h:inputText value="#{AdminPage_UserGroups.current.groupName}" required="true"></h:inputText> <br> </br>
                     <h:commandButton class="btn btn-primary" value="Kaydet" action="#{AdminPage_UserGroups.UpdateGroup()}"/>
@@ -51,7 +51,6 @@
                                      " action="#{AdminPage_UserGroups.DeleteGroup()}"/>
                 </h:form>
             </table>
-
         </div>
 
     </ui:define>

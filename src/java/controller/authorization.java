@@ -9,8 +9,10 @@ import Dao.Authoration;
 import entity.LoginUserInfo;
 import Util.ConnectionClass;
 import com.mysql.jdbc.PreparedStatement;
+import entity.Perms;
 import java.io.Serializable;
 import java.sql.ResultSet;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -35,7 +37,32 @@ public class authorization implements Serializable {
     public authorization(){
         info = new LoginUserInfo();
     }
-    
+    public boolean isAuthorized2Visual(String ScreenCode)
+    {
+        boolean result = false;
+        List<Perms> tmp = info.getUser().getUserType().getGroupPerms();
+        for(int i = 0; i < tmp.size(); i++)
+        {
+            if(tmp.get(i).getPerm().ScreenCode.equalsIgnoreCase(ScreenCode))
+            {
+                result= tmp.get(i).isPermVisual();
+            }
+        }
+       return result;  
+    }
+    public boolean isAuthorized2Set(String ScreenCode)
+    {
+        boolean result = false;
+        List<Perms> tmp = info.getUser().getUserType().getGroupPerms();
+        for(int i = 0; i < tmp.size(); i++)
+        {
+            if(tmp.get(i).getPerm().ScreenCode.equalsIgnoreCase(ScreenCode))
+            {
+                result= tmp.get(i).isPermSet();
+            }
+        }
+       return result;  
+    }
    
     // if auth result isnt success, PersonInfo etc. wont defined.
     public String getAuthorized(){

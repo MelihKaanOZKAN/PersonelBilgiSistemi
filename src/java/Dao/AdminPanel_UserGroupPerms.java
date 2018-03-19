@@ -54,7 +54,7 @@ public class AdminPanel_UserGroupPerms {
     public List<Perms> getPermList(UserGroup group) {
         List<Perms> result = new ArrayList<Perms>();
         try {
-            String sql = "SELECT PermId, PermName , PermLink FROM Perms P " +
+            String sql = "SELECT PermId, PermName , PermLink, ScreenCode FROM Perms P " +
 "            left join UserPerms UP on p.PermId = UP.permissionid " +
 "            and UP.UserTypeId = ? " +
 "            where UP.UserTypeId is null ";
@@ -66,6 +66,8 @@ public class AdminPanel_UserGroupPerms {
                tmp.setPerm(new Perms_Perm());
                 tmp.getPerm().setPermId(rs.getInt(1));
                 tmp.getPerm().setPermName(rs.getString(2));
+                tmp.getPerm().setPermLink(rs.getString(3));
+                tmp.getPerm().setScreenCode(rs.getString(4));
                 result.add(tmp);
             }
 
@@ -79,7 +81,7 @@ public class AdminPanel_UserGroupPerms {
   
         try {
             List<Perms> result = new ArrayList<Perms>();
-            String sql = "select PermissionId, pr.PermName, PermVisual, PermSet from UserPerms UP\n" +
+            String sql = "select PermissionId, pr.PermName, pr.PermLink, pr.ScreenCode, PermVisual, PermSet from UserPerms UP\n" +
             "inner join Perms pr on pr.PermId = UP.PermissionId\n" +
             "where UP.UserTypeId=?;";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
@@ -90,8 +92,10 @@ public class AdminPanel_UserGroupPerms {
                 tmp.setPerm(new Perms_Perm());
                 tmp.getPerm().setPermId(rs.getInt(1));
                 tmp.getPerm().setPermName(rs.getString(2));
-                tmp.setPermVisual(rs.getBoolean(3));
-                tmp.setPermSet(rs.getBoolean(4));
+                tmp.getPerm().setPermLink(rs.getString(3));
+                tmp.getPerm().setScreenCode(rs.getString(4));
+                tmp.setPermVisual(rs.getBoolean(5));
+                tmp.setPermSet(rs.getBoolean(6));
                 result.add(tmp);
             }
             group.setGroupPerms(result);

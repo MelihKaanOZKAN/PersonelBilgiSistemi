@@ -22,10 +22,11 @@ public class AdminPanel_Perms {
 
     public void AddPerm(Perms_Perm perm) {
         try {
-            String sql = "INSERT INTO Perms (PermName, PermLink) VALUES(?,?)";
+            String sql = "INSERT INTO Perms (PermName, PermLink, ScreenCode) VALUES(?,?,?)";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
             st.setString(1, perm.permName);
             st.setString(2, perm.PermLink);
+            st.setString(3, perm.getScreenCode());
             st.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -34,11 +35,12 @@ public class AdminPanel_Perms {
 
     public void UpdatePerm(Perms_Perm perm) {
         try {
-            String sql = "UPDATE Perms SET PermName=? , PermLink=? WHERE PermId=?";
+            String sql = "UPDATE Perms SET PermName=? , PermLink=?, ScreenCode=? WHERE PermId=?";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
             st.setString(1, perm.permName);
             st.setString(2, perm.PermLink);
-            st.setInt(3, perm.PermId);
+            st.setString(3, perm.getScreenCode());
+            st.setInt(4, perm.PermId);
             st.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -59,7 +61,7 @@ public class AdminPanel_Perms {
     public List<Perms_Perm> getPermList() {
         List<Perms_Perm> result = new ArrayList<Perms_Perm>();
         try {
-            String sql = "SELECT PermId, PermName , PermLink FROM Perms";
+            String sql = "SELECT PermId, PermName , PermLink, ScreenCode FROM Perms";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
@@ -67,6 +69,7 @@ public class AdminPanel_Perms {
                 tmp.setPermId(rs.getInt(1));
                 tmp.setPermName(rs.getString(2));
                 tmp.setPermLink(rs.getString(3));
+                tmp.setScreenCode(rs.getString(4));
                 result.add(tmp);
             }
 

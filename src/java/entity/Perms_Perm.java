@@ -10,7 +10,15 @@ package entity;
  * @author Syste
  */
 public class Perms_Perm {
-    public String permName, PermLink;
+    public String permName, PermLink, ScreenCode;
+
+    public String getScreenCode() {
+        return ScreenCode;
+    }
+
+    public void setScreenCode(String ScreenCode) {
+        this.ScreenCode = ScreenCode;
+    }
     public int PermId;
 
     public int getPermId() {
