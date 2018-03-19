@@ -38,7 +38,7 @@ public class Authoration {
                     info.getUser().getuserinfo().setEName(rs.getString(4));
                     info.getUser().getuserinfo().setESurname(rs.getString(5));
                     info.getUser().getuserinfo().setCitizensShipNumber(rs.getString(6));
-                    info.setUserPerms(permDao.getUserPerms(info));
+                    info.getUser().getUserType().setGroupPerms(permDao.getUserPerms(info));
             }
         } catch (Exception ex)
         {

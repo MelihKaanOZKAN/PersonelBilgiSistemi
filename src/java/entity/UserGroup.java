@@ -5,6 +5,8 @@
  */
 package entity;
 
+import java.util.List;
+
 /**
  *
  * @author Casper
@@ -12,7 +14,17 @@ package entity;
 public class UserGroup {
     private int GroupId;
    private String GroupName;
-   
+    private List<Perms> GroupPerms;
+
+    public List<Perms> getGroupPerms() {
+        return GroupPerms;
+    }
+
+    public void setGroupPerms(List<Perms> GroupPerms) {
+        this.GroupPerms = GroupPerms;
+    }
+
+  
     public int getGroupId() {
         return GroupId;
     }

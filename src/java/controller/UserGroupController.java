@@ -5,7 +5,7 @@
  */
 package controller;
 
-import Dao.AdminPanel_PermGroup;
+import Dao.AdminPanel_UserGroup;
 import entity.UserGroup;
 import java.io.Serializable;
 import java.util.List;
@@ -18,10 +18,10 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name="AdminPage_UserGroups")
 @SessionScoped
-public class PermGroupController implements Serializable {
+public class UserGroupController implements Serializable {
     UserGroup current = new UserGroup();
     List<UserGroup> UserGroupList;
-    AdminPanel_PermGroup UserGroupDao = new AdminPanel_PermGroup();
+    AdminPanel_UserGroup UserGroupDao = new AdminPanel_UserGroup();
     UserGroup currentGroup4Perm = new UserGroup();
 
     public UserGroup getCurrentGroup4Perm() {

@@ -18,7 +18,6 @@ import javax.faces.bean.SessionScoped;
 public class LoginUserInfo {
     private boolean authStatus = false;
     private User user;
-    private List<Perms> UserPerms;
 
     public LoginUserInfo() {
         user = new User();
@@ -41,14 +40,5 @@ public class LoginUserInfo {
     public void setAuthStatus(boolean authStatus) {
         this.authStatus = authStatus;
     }
-
-   
-    public List<Perms> getUserPerms() {
-        return UserPerms;
-    }
-
-    public void setUserPerms(List<Perms> UserPerms) {
-        this.UserPerms = UserPerms;
-    }
-
+    
 }

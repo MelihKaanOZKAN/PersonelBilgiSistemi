@@ -51,7 +51,7 @@ public class AdminPanel_UserGroupPerms {
          
      }
      
-    public List<Perms> getPermList(int GroupId) {
+    public List<Perms> getPermList(UserGroup group) {
         List<Perms> result = new ArrayList<Perms>();
         try {
             String sql = "SELECT PermId, PermName , PermLink FROM Perms P " +
@@ -59,7 +59,7 @@ public class AdminPanel_UserGroupPerms {
 "            and UP.UserTypeId = ? " +
 "            where UP.UserTypeId is null ";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
-            st.setInt(1, GroupId);
+            st.setInt(1, group.getGroupId());
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Perms tmp = new Perms();
@@ -74,14 +74,16 @@ public class AdminPanel_UserGroupPerms {
         }
         return result;
     }
-    public List<Perms> getGroupPerms(int GroupId) {
-        List<Perms> result = new ArrayList<Perms>();
+    
+    public UserGroup getGroupPerms(UserGroup group) {
+  
         try {
-            String sql = "select PermissionId, pr.PermName, PermVisual, PermSet from UserPerms UP " +
-            "inner join Perms pr on pr.PermId = UP.PermissionId " +
-            "where UP.UserTypeId=?; ";
+            List<Perms> result = new ArrayList<Perms>();
+            String sql = "select PermissionId, pr.PermName, PermVisual, PermSet from UserPerms UP\n" +
+            "inner join Perms pr on pr.PermId = UP.PermissionId\n" +
+            "where UP.UserTypeId=?;";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
-            st.setInt(1, GroupId);
+            st.setInt(1, group.getGroupId());
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Perms tmp = new Perms();
@@ -92,10 +94,10 @@ public class AdminPanel_UserGroupPerms {
                 tmp.setPermSet(rs.getBoolean(4));
                 result.add(tmp);
             }
-
+            group.setGroupPerms(result);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return result;
+        return group;
     }
 }

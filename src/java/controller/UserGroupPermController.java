@@ -21,7 +21,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class UserGroupPermController implements Serializable {
     Perms current = null;
-    List<Perms> UserGroupList;
+    List<UserGroup> UserGroupList;
     List<Perms> PermList;
     AdminPanel_UserGroupPerms UserGroupPermDao = new AdminPanel_UserGroupPerms();
     UserGroup selectedGroup;
@@ -54,6 +54,14 @@ public class UserGroupPermController implements Serializable {
         return selectedGroup;
     }
 
+    public List<Perms> getPermList() {
+        return PermList;
+    }
+
+    public void setPermList(List<Perms> PermList) {
+        this.PermList = PermList;
+    }
+
 
     public void setSelectedGroup(UserGroup selectedGroup) {
         this.selectedGroup = selectedGroup;
@@ -65,37 +73,26 @@ public class UserGroupPermController implements Serializable {
     
     public List<Perms> getPermList(UserGroup grp) {
         selectedGroup = grp;
-        PermList = UserGroupPermDao.getPermList(selectedGroup.getGroupId());
+        PermList = UserGroupPermDao.getPermList(selectedGroup);
         return PermList;
     }
 
-    public void setPermList(List<Perms> PermList) {
-        this.PermList = PermList;
-    }
-
+    
     public void setCurrent(Perms current) {
         this.current = current;
     }
 
-    public List<Perms> getUserGroupList(UserGroup grp) {
-        selectedGroup = grp;
-        UserGroupList = UserGroupPermDao.getGroupPerms(selectedGroup.getGroupId());
-        return UserGroupList;
-    }
-
-    public void setUserGroupList(List<Perms> UserGroupList) {
-        this.UserGroupList = UserGroupList;
-    }
-    
     public void setPermtoGroup()
     {
         UserGroupPermDao.addPerm2Group(current, selectedGroup);
+        selectedGroup = UserGroupPermDao.getGroupPerms(selectedGroup);
         current=null;
         PermList = null;
     }
     public void deletePermFromGroup(Perms perm)
     {
         UserGroupPermDao.deletePermFromGroup(perm, selectedGroup);
+        selectedGroup = UserGroupPermDao.getGroupPerms(selectedGroup);
     }
     
    

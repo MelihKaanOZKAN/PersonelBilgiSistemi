@@ -54,10 +54,8 @@
 
 
             <div class="menu">             
-                <h:dataTable border="1" width="200"  value="#{auth.info.userPerms}"  var="perm">
-
+                <h:dataTable border="1" width="200"  value="#{auth.info.user.userType.groupPerms}"  var="perm">
                     <h:column>
-
                         <h:form>
                             <h:commandLink action = "#{perm.perm.getPermLink()}">
                                 <div class="MenuRow">
