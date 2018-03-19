@@ -15,6 +15,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -59,5 +60,20 @@ public class authorization implements Serializable {
     public boolean isWrongPass() {
         return WrongPass;
     }
-
+    public String getCurrentRowStyle(String current)
+    {
+        String viewId = ((HttpServletRequest) FacesContext.getCurrentInstance() 
+ .getExternalContext().getRequest()).getRequestURI(); 
+        String tmp[] = viewId.split("/");
+        current =   "/" + tmp[1] + "/" + tmp[2] + current +".xhtml";
+        /*System.out.println(current +"-" + viewId);
+        System.out.println(current.equalsIgnoreCase(viewId));*/
+        if(current.equalsIgnoreCase(viewId))
+        {
+            return  "background-color:#9999ff";
+        }
+        else{
+              return "";
+        }
+    }
 }
