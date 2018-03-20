@@ -40,15 +40,23 @@
         <div class="ButtonDiv">
             <table class="table">
                 <h:form rendered="#{auth.isAuthorized2Set(AdminPage_UserGroups.screenCode)}">
-                    Grup Id: <h:inputText readonly="true" value="#{AdminPage_UserGroups.current.groupId}"></h:inputText> <br> </br>
-                    Grup Adı: <h:inputText value="#{AdminPage_UserGroups.current.groupName}" required="true"></h:inputText> <br> </br>
+                      <div class="form-group">
+                    <h:outputText class="formText" value="Grup Id:"/>
+                    <h:inputText class="form-control" readonly="true" value="#{AdminPage_UserGroups.current.groupId}"></h:inputText> 
+                     </div>
+                  <div class="form-group">
+                     <h:outputText class="formText" value="Grup Adı:"/>
+                     <h:inputText class="form-control" value="#{AdminPage_UserGroups.current.groupName}" required="true"></h:inputText> 
+                      </div>
+                  <div class="form-group">
                     <h:commandButton class="btn btn-primary" value="Kaydet" action="#{AdminPage_UserGroups.UpdateGroup()}"/>
-                    <h:commandButton class="btn btn-danger" value="Sil" onclick="if (!confirm('Grup Silinecek?')) {
+                    <h:commandButton class="btn btn-danger btnproperties" value="Sil" onclick="if (!confirm('Grup Silinecek?')) {
                             return false;
                         }
                         ;
                         return true;
                                      " action="#{AdminPage_UserGroups.DeleteGroup()}"/>
+                  </div>
                 </h:form>
             </table>
         </div>

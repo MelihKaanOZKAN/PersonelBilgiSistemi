@@ -56,10 +56,10 @@
             <div class="menu">             
                 <h:dataTable border="1" width="200"  value="#{auth.info.user.userType.groupPerms}"  var="perm">
                     <h:column>
-                        <h:form>
+                        <h:form class="#{auth.getCurrentRowStyle(perm.perm.getPermLink())}">
                             <h:commandLink action = "#{perm.perm.getPermLink()}">
                                 <div class="MenuRow">
-                                    <div style="padding-top:10px ">
+                                    <div style="padding-top:10px " >
                                         <h:outputText value="#{perm.perm.permName}"/>
                                     </div>
                                 </div>
@@ -67,6 +67,19 @@
                         </h:form>
                     </h:column>
                 </h:dataTable>
+                <div class="MenuRow">
+                    <h:form >
+                        <div style="padding-top:10px ">
+                           <h:commandLink action = "/PasswordChange.xhtml">
+                                <div class="MenuRow">
+                                    <div style="padding-top:10px " >
+                                        <h:outputText value="Şifre değiştir"/>
+                                    </div>
+                                </div>
+                            </h:commandLink>
+                        </div>
+                    </h:form>
+                </div>
                 <div class="MenuRow">
                     <h:form >
                         <div style="padding-top:10px ">

@@ -33,7 +33,7 @@
                     <f:facet name="header">Sayfa Linki</f:facet>
                         #{perm.permLink}
                 </h:column>
-                <h:column headerClass="table-hover">
+                <h:column headerClass="table-hover" rendered="#{auth.isAuthorized2Set(AdminPage_Perms.screenCode)}">
                     <center>
                         <f:facet name="header">İşlemler</f:facet>
                         <div class="btn-group">
@@ -47,18 +47,32 @@
             </h:dataTable>
         </div>
         <div class="ButtonDiv">
-            <h:form>
-                Yetki Id: <h:inputText readonly="true" value="#{AdminPage_Perms.currentPerm.permId}"></h:inputText> <br> </br>
-                Ekran kodu: <h:inputText value="#{AdminPage_Perms.currentPerm.screenCode}" required="true"></h:inputText> <br> </br>
-                Yetki Adı: <h:inputText value="#{AdminPage_Perms.currentPerm.permName}" required="true"></h:inputText> <br> </br>
-                Sayfa Linki: <h:inputText value="#{AdminPage_Perms.currentPerm.permLink}" required="true"></h:inputText> <br> </br>
+            <h:form rendered="#{auth.isAuthorized2Set(AdminPage_Perms.screenCode)}">>
+                  <div class="form-group">
+                <h:outputText class="formText" value="Yetki Id:"/> 
+                <h:inputText readonly="true" class="form-control" value="#{AdminPage_Perms.currentPerm.permId}"></h:inputText>
+                  </div>
+                  <div class="form-group">
+                <h:outputText class="formText" value="Ekran kodu:"/> 
+                <h:inputText class="form-control" value="#{AdminPage_Perms.currentPerm.screenCode}" required="true"></h:inputText>
+                  </div>
+                  <div class="form-group">
+                <h:outputText class="formText" value="Yetki Adı:"/> 
+                <h:inputText class="form-control" value="#{AdminPage_Perms.currentPerm.permName}" required="true"></h:inputText>
+                  </div>
+                  <div class="form-group">
+                <h:outputText class="formText" value="Sayfa Linki:"/> 
+                <h:inputText class="form-control" value="#{AdminPage_Perms.currentPerm.permLink}" required="true"></h:inputText>
+                  </div>
+                  <div class="form-group">
                 <h:commandButton class="btn btn-primary" value="Kaydet" action="#{AdminPage_Perms.UpdatePerm()}"/>
-                <h:commandButton class="btn btn-danger" value="Sil" onclick="if (!confirm('Yetki Silinecek?')) {
+                <h:commandButton class="btn btn-danger btnproperties" value="Sil" onclick="if (!confirm('Yetki Silinecek?')) {
                                     return false;
                                 }
                                 ;
                                 return true;
                                 " action="#{AdminPage_Perms.DeletePerm()}"/>
+                  </div>
             </h:form>
         </div>
 

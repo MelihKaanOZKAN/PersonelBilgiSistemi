@@ -6,6 +6,10 @@ body{
     width:100%; 
     height: auto; 
     margin: 30px 0}
+.passChange
+{
+    width:50%;
+}
 .logo{
     width: 500px; 
     height: 174px; 
@@ -60,3 +64,6 @@ body{
     text-align:center;
 }
 
+.active{
+ background: #2b90f5;
+}
