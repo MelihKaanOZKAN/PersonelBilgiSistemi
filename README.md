@@ -14,7 +14,7 @@ ALTER TABLE UserPerms ADD CONSTRAINT UserPerms_fk0 FOREIGN KEY (PermissionId) RE
 
 ALTER TABLE UserPerms ADD CONSTRAINT UserPerms_fk1 FOREIGN KEY (UserTypeId) REFERENCES UserTypes(UserTypeId) ON DELETE CASCADE;
 
-
+---------------------------------------------------------------------------------------------------------------------------------------
 Tablolar Güncellendi. İsimleri Değişti. 1 tablo eklendi. 14.03.2018 - 11:52 PM
 
  RENAME TABLE adresstable TO adress;
@@ -36,9 +36,9 @@ CREATE TABLE announcements (
 ENGINE=InnoDB
 ;
 
+-----------------------------------------------------------------------------------------------------------------------------------------İki Tane Tablo Eklendi. Yüksek Önceliklidir. (22.03.2018 09:13 )
 
 
-İki Tane Tablo Eklendi. Yüksek Önceliklidir. (22.03.2018 09:13 )
 CREATE TABLE istrainingInfo (
 	TraningId INT(11) NOT NULL AUTO_INCREMENT,
 	TrainingName VARCHAR(50) NOT NULL DEFAULT '0',
