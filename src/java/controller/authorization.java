@@ -5,18 +5,15 @@
  */
 package controller;
 
+
 import dao.Authoration;
 import entity.LoginUserInfo;
-import util.ConnectionClass;
-import com.mysql.jdbc.PreparedStatement;
 import entity.Perms;
 import java.io.Serializable;
-import java.sql.ResultSet;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
 /**
