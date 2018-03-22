@@ -5,7 +5,7 @@
  */
 package controller;
 
-import Util.ConnectionClass;
+import util.ConnectionClass;
 import com.mysql.jdbc.PreparedStatement;
 
 /**

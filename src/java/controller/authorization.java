@@ -5,9 +5,9 @@
  */
 package controller;
 
-import Dao.Authoration;
+import dao.Authoration;
 import entity.LoginUserInfo;
-import Util.ConnectionClass;
+import util.ConnectionClass;
 import com.mysql.jdbc.PreparedStatement;
 import entity.Perms;
 import java.io.Serializable;

@@ -15,6 +15,7 @@ import javax.faces.event.ValueChangeEvent;
 public class Perms {
     Perms_Perm perm ;
     boolean permVisual, permSet;
+    
     public Perms_Perm getPerm() {
         return perm;
     }

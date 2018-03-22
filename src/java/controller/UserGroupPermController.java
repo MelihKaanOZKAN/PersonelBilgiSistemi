@@ -5,7 +5,7 @@
  */
 package controller;
 
-import Dao.AdminPanel_UserGroupPerms;
+import dao.AdminPanel_UserGroupPerms;
 import entity.Perms;
 import entity.UserGroup;
 import java.io.Serializable;

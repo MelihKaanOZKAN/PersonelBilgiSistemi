@@ -5,7 +5,7 @@
  */
 package controller;
 
-import Dao.Users;
+import dao.Users;
 import entity.User;
 import entity.changePass;
 import javax.faces.bean.ManagedBean;

@@ -5,8 +5,8 @@
  */
 package controller;
 
-import Dao.Users;
-import Dao.personalinfoDAO;
+import dao.Users;
+import dao.personalinfoDAO;
 import entity.User;
 import entity.UserGroup;
 import java.util.List;

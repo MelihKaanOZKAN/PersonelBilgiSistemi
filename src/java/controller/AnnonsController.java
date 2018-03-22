@@ -5,7 +5,7 @@
  */
 package controller;
 
-import Dao.annonsmentDao;
+import dao.annonsmentDao;
 import entity.Annons;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
