@@ -35,3 +35,32 @@ CREATE TABLE announcements (
 )
 ENGINE=InnoDB
 ;
+
+
+
+İKİ Tane Tablo Eklendi. Yüksek Önceliklidir.
+CREATE TABLE istrainingInfo (
+	TraningId INT(11) NOT NULL AUTO_INCREMENT,
+	TrainingName VARCHAR(50) NOT NULL DEFAULT '0',
+	TrainingInfo VARCHAR(500) NOT NULL DEFAULT '0',
+	BeginDate DATE NOT NULL,
+	EndDate DATE NOT NULL,
+	ExamDate DATE NOT NULL,
+	PRIMARY KEY (TraningId)
+)
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE trainees (
+	RecordId INT(11) NOT NULL AUTO_INCREMENT,
+	TrainingID INT(11) NOT NULL DEFAULT '0',
+	PersonId INT(11) NOT NULL DEFAULT '0',
+	participateTraining BIT(1) NOT NULL DEFAULT b'0',
+	participateExam BIT(1) NOT NULL DEFAULT b'0',
+	passExam BIT(1) NOT NULL DEFAULT b'0',
+	PRIMARY KEY (RecordId)
+)
+ENGINE=InnoDB
+;
+
