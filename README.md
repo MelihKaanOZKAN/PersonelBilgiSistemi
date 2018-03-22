@@ -38,7 +38,7 @@ ENGINE=InnoDB
 
 
 
-İKİ Tane Tablo Eklendi. Yüksek Önceliklidir.
+İki Tane Tablo Eklendi. Yüksek Önceliklidir. (22.03.2018 09:13 )
 CREATE TABLE istrainingInfo (
 	TraningId INT(11) NOT NULL AUTO_INCREMENT,
 	TrainingName VARCHAR(50) NOT NULL DEFAULT '0',
