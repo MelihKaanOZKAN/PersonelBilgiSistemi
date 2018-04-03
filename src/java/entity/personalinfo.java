@@ -12,21 +12,23 @@ import java.sql.Date;
  * @author HakanBey
  */
 public class personalinfo {
+
     private int PInfoId;
     private String EName;
     private String ESurname;
     private String SocialSecurityNumber;
     private String CitizensShipNumber;
-    private int Adress;
+    private adress Adress;
     private Date BirthDate;
-    private int Communication;
+    private communicationinfo Communication;
     private Boolean Gender;
     private int MaritalStatus;
 
     public personalinfo() {
+
     }
 
-    public personalinfo(int PInfoId, String EName, String ESurname, String SocialSecurityNumber, String CitizensShipNumber, int Adress, Date BirthDate, int Communication, Boolean Gender, int MaritalStatus) {
+    public personalinfo(int PInfoId, String EName, String ESurname, String SocialSecurityNumber, String CitizensShipNumber, adress Adress, Date BirthDate, communicationinfo Communication, Boolean Gender, int MaritalStatus) {
         this.PInfoId = PInfoId;
         this.EName = EName;
         this.ESurname = ESurname;
@@ -39,8 +41,6 @@ public class personalinfo {
         this.MaritalStatus = MaritalStatus;
     }
 
-    
-    
     public int getPInfoId() {
         return PInfoId;
     }
@@ -81,11 +81,13 @@ public class personalinfo {
         this.CitizensShipNumber = CitizensShipNumber;
     }
 
-    public int getAdress() {
+    public adress getAdress() {
+        if(Adress == null)
+            Adress = new adress();
         return Adress;
     }
 
-    public void setAdress(int Adress) {
+    public void setAdress(adress Adress) {
         this.Adress = Adress;
     }
 
@@ -97,11 +99,11 @@ public class personalinfo {
         this.BirthDate = BirthDate;
     }
 
-    public int getCommunication() {
+    public communicationinfo getCommunication() {
         return Communication;
     }
 
-    public void setCommunication(int Communication) {
+    public void setCommunication(communicationinfo Communication) {
         this.Communication = Communication;
     }
 
@@ -125,7 +127,6 @@ public class personalinfo {
     public String toString() {
         return "personalinfo{" + "PInfoId=" + PInfoId + ", EName=" + EName + ", ESurname=" + ESurname + ", SocialSecurityNumber=" + SocialSecurityNumber + ", CitizensShipNumber=" + CitizensShipNumber + ", Adress=" + Adress + ", BirthDate=" + BirthDate + ", Communication=" + Communication + ", Gender=" + Gender + ", MaritalStatus=" + MaritalStatus + '}';
     }
-    
     
     
 }

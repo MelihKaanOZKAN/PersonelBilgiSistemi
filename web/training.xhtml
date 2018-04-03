@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="title">
+        Ana Sayfa
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="FormDiv">
+            <h:dataTable class="table table-striped" value="#{TrainingInfoC.TList}" var="t">
+
+                <h:column>
+                    <f:facet name="header">Eğitim Adı</f:facet>
+                        #{t.trainingName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Eğitimin Başlangıç Tarihi</f:facet>
+                        #{t.beginDate}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Eğitimin Bitiş Tarihi</f:facet>
+                        #{t.endDate}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Sınav Tarihi</f:facet>
+                        #{t.examDate}
+                </h:column>
+                <h:column>
+                    <h:form>
+                        <f:facet name="header">İşlemler</f:facet>
+                        <h:commandButton class="btn btn-secondary" value="Düzenle" action="#{TrainingInfoC.setSelectedTraınıng(t)}"/>
+                    </h:form>
+                </h:column>
+
+            </h:dataTable>
+        </div>
+        <div class="ButtonDiv">
+            <h:form>
+                <div class="form-group">
+                    <h:outputText value="Eğitim Adı" />
+                    <h:inputText class="form-control" value="#{TrainingInfoC.selectedTraınıng.trainingName}" />
+                </div>
+
+
+                <div class="form-group">
+                    <h:outputText value="Eğitim Bilgisi" />
+                    <h:inputText class="form-control" value="#{TrainingInfoC.selectedTraınıng.trainingInfo}" />
+                </div>
+
+                <div class="form-group">
+                    <h:outputText value="Başlama Tarih" />
+                    <h:inputText class="form-control" value="#{TrainingInfoC.selectedTraınıng.beginDate}">
+                        <f:converter converterId="convertDate"/>
+                    </h:inputText>
+                </div>
+                <div class="form-group">
+                    <h:outputText value="Bitiş Tarihi" />
+                    <h:inputText class="form-control" value="#{TrainingInfoC.selectedTraınıng.endDate}">
+                        <f:converter converterId="convertDate"/>
+                    </h:inputText>
+                </div>
+                <div class="form-group">
+                    <h:outputText value="Sınav Tarihi" />
+                    <h:inputText class="form-control" value="#{TrainingInfoC.selectedTraınıng.examDate}">
+                        <f:converter converterId="convertDate"/>
+                    </h:inputText>
+                </div>
+
+                <div class="form-group">
+                    <h:form>
+                        <h:commandButton class="btn btn-primary" value="Kaydet" action="#{TrainingInfoC.Kaydet()}" />
+
+                        <h:commandButton class="btn btn-danger" value="Sil" action="#{TrainingInfoC.Sil()}" onclick="if (!confirm('Seçili Kayıt Silinecek?')) {
+                                    return false;
+                                }
+                                ;
+                                return true;
+                                         " />
+
+                    </h:form>
+                </div> 
+            </h:form>
+
+
+
+
+
+        </div>
+
+    </ui:define>
+
+</ui:composition>

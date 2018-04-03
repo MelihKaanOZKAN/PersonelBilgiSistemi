@@ -1,9 +1,9 @@
 
 body{
-     background-image: url("/PersonelBilgiSistemi/faces/resources/img/back0.png");
-    }
+    background-image: url("/PersonelBilgiSistemi/faces/resources/img/back0.png");
+}
 .sablon{
-    width:100%; 
+    width:98.5%; 
     height: auto; 
     margin: 30px 0}
 .passChange
@@ -32,7 +32,7 @@ body{
 }
 .menu{
     width: 200px;
-    height:935px;
+    height:635px;
     float:left; 
     margin:19px 10px 0 10px;
     background: #2c3a61; 
@@ -46,10 +46,14 @@ body{
     background:#0F4C76; 
 }
 .alan{
-    width: 87.9%; 
+    width: 80.9%; 
     height: 100%;
     float: right; 
     background-image: url("/PersonelBilgiSistemi/faces/resources/img/back03.jpg");
+    -moz-background-size: 100% 100%; /* Firefox 3.6 */
+    -o-background-size: 100% 100%; /* Opera 9.5 */
+    -webkit-background-size: 100% 100%; /* Safari 3.0, Chrome */
+    background-size: 100% 100%; /* w3c, Firefox 4.0, ie9 */
     background-repeat: no-repeat;
     color:#FF8600;
     margin: -19px 0 0 0;
@@ -65,5 +69,5 @@ body{
 }
 
 .active{
- background: #2b90f5;
+    background: #2b90f5;
 }

@@ -7,7 +7,7 @@ package controller;
 
 
 import dao.Users;
-import dao.personalinfoDAO;
+import dao.personalinfoDao;
 import entity.User;
 import entity.UserGroup;
 import java.util.List;
@@ -26,7 +26,7 @@ public class UserController {
     private List<User> userList;
     private User selectedUser;
     private Users userDao = new Users();
-    private personalinfoDAO PinfoDao = new personalinfoDAO();
+    private personalinfoDao PinfoDao = new personalinfoDao();
 
     private boolean buttonsActive = false;
 

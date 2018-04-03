@@ -84,7 +84,8 @@ public class AdminPanel_UserGroupPerms {
             List<Perms> result = new ArrayList<>();
             String sql = "select PermissionId, pr.PermName, pr.PermLink, pr.ScreenCode, PermVisual, PermSet from UserPerms UP\n" +
             "inner join Perms pr on pr.PermId = UP.PermissionId\n" +
-            "where UP.UserTypeId=?;";
+            "where UP.UserTypeId=?"
+                    + " ORDER BY pr.PermName ASC;";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
             st.setInt(1, group.getGroupId());
             ResultSet rs = st.executeQuery();
