@@ -5,11 +5,11 @@ import entity.personalinfo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.view.ViewScoped;
 
 @ManagedBean(name = "Personal")
-@ViewScoped
+@SessionScoped
 public class personalInfoController implements Serializable {
 
     private List<personalinfo> clist;
@@ -21,7 +21,27 @@ public class personalInfoController implements Serializable {
         this.clist = new ArrayList<>();
     }
 
+    public String izinIslem(personalinfo person){
+        this.personal = person;
+        return "izinislemleri";
+    }
+    public String updateForm(personalinfo person)
+    {
+        this.personal=person;
+        return "persons";
+    }
     
+    public String update(personalinfo person)
+    {
+        this.getPersonalDao().updatePersonal(person);
+        return "persons";
+    }
+    
+    public String delete(personalinfo person)
+    {
+        this.getPersonalDao().deletePersonal(person);
+        return "persons";
+    }
     
     public String create() {
         this.getPersonalDao().addPersonal(this.personal);

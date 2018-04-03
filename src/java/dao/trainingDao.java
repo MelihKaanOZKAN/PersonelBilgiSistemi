@@ -6,13 +6,16 @@
 package dao;
 
 import com.mysql.jdbc.PreparedStatement;
+import converter.dateConverter;
 import entity.trainingInfo;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import util.ConnectionClass;
 
 /**
@@ -23,10 +26,26 @@ public class trainingDao {
 
     ConnectionClass connect = new ConnectionClass();
 
+    private java.sql.Date convertDate(String string)
+    {
+           java.util.Date date = null;
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            string = string.replace('-','/');
+           date  = format.parse(string);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        java.sql.Date dt = new java.sql.Date(date.getTime());
+        return dt;
+    }
     public List<trainingInfo> getTrainingList() {
         List<trainingInfo> result = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM trainingInfo";
+            String sql = "SELECT TraningId, trainingName, traininginfo, BeginDate, "
+                    + "EndDate, "
+                    + "ExamDate "
+                    + " FROM trainingInfo";
 
             PreparedStatement pstm = (PreparedStatement) connect.connection.prepareStatement(sql);
             ResultSet rs = pstm.executeQuery();
@@ -35,9 +54,11 @@ public class trainingDao {
                 t.setTrainingId(rs.getInt("TraningId"));
                 t.setTrainingName(rs.getString("TrainingName"));
                 t.setTrainingInfo(rs.getString("TrainingInfo"));
+                
                 t.setBeginDate(rs.getDate("BeginDate"));
-                t.setEndDate(rs.getDate("EndDate"));
-                t.setExamDate(rs.getDate("ExamDate"));
+
+               t.setEndDate(rs.getDate("EndDate"));
+               t.setExamDate(rs.getDate("ExamDate"));
                 result.add(t);
             }
         } catch (SQLException ex) {
@@ -63,7 +84,7 @@ public class trainingDao {
             ex.printStackTrace();
         }
     }
-    
+
     public void Guncelle(trainingInfo kyt) {
         try {
             String sql = "UPDATE  traininginfo SET TrainingName=?, TrainingInfo=?, BeginDate=?, EndDate=?, ExamDate=? WHERE TraningId=?";
@@ -74,21 +95,21 @@ public class trainingDao {
             p.setDate(3, kyt.getBeginDate());
             p.setDate(4, kyt.getEndDate());
             p.setDate(5, kyt.getExamDate());
-            p.setInt(6,kyt.getTrainingId());
+            p.setInt(6, kyt.getTrainingId());
             p.executeUpdate();
         } catch (SQLException ex) {
 
             ex.printStackTrace();
         }
     }
-    public void sil(trainingInfo kyt)
-    {
+
+    public void sil(trainingInfo kyt) {
         try {
             String sql = "DELETE FROM traininginfo WHERE TraningId=?";
 
             PreparedStatement p = (PreparedStatement) connect.connection.prepareStatement(sql);
-            
-            p.setInt(1,kyt.getTrainingId());
+
+            p.setInt(1, kyt.getTrainingId());
             p.executeUpdate();
         } catch (SQLException ex) {
 

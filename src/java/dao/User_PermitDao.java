@@ -47,15 +47,15 @@ public class User_PermitDao {
     }
 
     public List<User_Permits> getPermits(personalinfo person) {
-        List<User_Permits> result = new ArrayList<User_Permits>();
-
+        List<User_Permits> result = new ArrayList<>();
+        System.out.println("daoPermit " + person.getCitizensShipNumber() + " " + person.getPInfoId());
+        
         try {
-            String sql = "Select PermitId, PTP.PermitName, PermitComment, Date,PTP.PermitTypeId from PermitTable PT"
-                    + "inner join PermitTypes PTP on PTP.PermitTypeId = PT.PermitType  "
-                    + "WHERE PersonID=?";
+            String sql = "Select PermitId, PTP.PermitName, PermitComment, Date,PTP.PermitTypeId from permits PT " +
+"                    inner join PermitTypes PTP on PTP.PermitTypeId = PT.PermitType  " +
+"                    WHERE PT.PersonId=?";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
             st.setInt(1, person.getPInfoId());
-
             ResultSet rs = st.executeQuery();
 
             while (rs.next()) {
@@ -63,8 +63,8 @@ public class User_PermitDao {
                 tmp.setPermitId(rs.getInt(1));
                 tmp.setPerson(person);
                 User_PermitTypes tmp2 = new User_PermitTypes();
-                tmp2.setPermitName(rs.getString(1));
-               tmp2.setPermitTypeId(rs.getInt(5));
+                tmp2.setPermitName(rs.getString(2));
+                tmp2.setPermitTypeId(rs.getInt(5));
                 tmp.setPermitType(tmp2);
                 tmp.setPermitComment(rs.getString(3));
                 tmp.setDate(rs.getDate(4));

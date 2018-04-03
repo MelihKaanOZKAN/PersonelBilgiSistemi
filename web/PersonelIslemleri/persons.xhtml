@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="title">
+        Ana Sayfa
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="container">
+            <h:form>
+                <h:dataTable styleClass="table table-striped" value="#{Personal.clist}" var="person">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                            #{person.PInfoId}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Personal İsim</f:facet>
+                        <h:commandLink action="#{Personal.updateForm(person)}" value="#{person.EName}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Personal Soyisim</f:facet>
+                            #{person.ESurname}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">SGK Numarası</f:facet>
+                            #{person.socialSecurityNumber}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">T.C Numarası</f:facet>
+                            #{person.citizensShipNumber}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Doğum Tarihi</f:facet>
+                            #{person.birthDate}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Cinsiyet</f:facet>
+                            #{person.gender}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Medeni Hal</f:facet>
+                            #{person.maritalStatus}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Sil</f:facet>
+                        <div class="btn btn-group" role="group" aria-label="Basic example">
+                            <h:inputHidden value="#{Personal.personal.PInfoId}"/>
+                            <h:commandButton action="#{Personal.delete(person)}" class="btn btn-danger" value="Sil"/>
+                            <h:commandButton rendered="#{Personal.personal.PInfoId!=null}" class="btn btn-dark" value="*GÜNCELLE*"/>
+                            <h:commandButton type="submit" value="İzin İşlemleri" class="btn btn-info" action="#{Personal.izinIslem(person)}"/>
+                        </div>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

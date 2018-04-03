@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Named;
 
 @ManagedBean(name = "PersonInfoPermit")
 @SessionScoped
@@ -44,11 +43,13 @@ public class PermitController implements Serializable {
     }
 
     public PermitController() {
+         permitDao = new User_PermitDao();
     }
 
     public List<User_Permits> getPermitList(personalinfo person) {
-        permitList = permitDao.getPermits(person);
         this.Person = person;
+        System.out.println("Controller " + person.getCitizensShipNumber() + " " + person.getPInfoId());
+        permitList = permitDao.getPermits(this.Person);
         return permitList;
     }
 

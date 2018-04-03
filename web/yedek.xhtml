@@ -1,0 +1,20 @@
+<div class="izinformdiv2">
+
+            <h:form>
+                İzin Numarası:<h:inputText readonly="true" value="#{PersonInfoPermit.permit.permitId}"/>                             <br>                  
+                    
+                            İzin Türü: <h:selectOneMenu value="#{PersonInfoPermit.permit.permitName}">
+                                <f:selectItems value="#{PersonInfoPermit.permitTypes}" />
+                            </h:selectOneMenu>
+                            İzin Açıklaması:<h:inputText value="#{PersonInfoPermit.permit.permitComment}"/>
+                            <br> <br>
+                                    izin Tarihi:<h:inputText value="#{PersonInfoPermit.permit.date}">
+                                        <f:convertDateTime pattern="yyyy/MM/dd"/>
+                                    </h:inputText>
+
+                                    <h:commandButton action="#{PersonInfoPermit.eklegüncelle()}" value="Kaydet"/>
+                                    </h:form>
+
+
+
+                                    </div>
