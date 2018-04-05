@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-    <title>Facelet Title</title>
+    <title>Adresler</title>
 
         <h:outputStylesheet library="css" name="bootstrap.css"/>
     </h:head>
@@ -15,17 +15,17 @@
             
                 <h:column>
                     <f:facet name="header">ID</f:facet>
-                    #{aysun.AdressId}
+                    #{aysun.adressId}
                 </h:column>
                 <h:column>
                     <f:facet name="header">adres</f:facet>
-                    #{aysun.Adress}
+                    #{aysun.adress}
                 </h:column>
                 <h:column>
                     <f:facet name="header">sehir</f:facet>
-                    #{aysun.City}
+                    #{aysun.city.cityName}
                      <f:facet name="header">ilce</f:facet>
-                    #{aysun.District}
+                    #{aysun.district.districtName}
                 </h:column>
             </h:dataTable>
 </center>

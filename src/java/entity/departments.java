@@ -21,6 +21,31 @@ public class departments {
         this.DepartmentName = DepartmentName;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 47 * hash + this.DeparmentId;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final departments other = (departments) obj;
+        if (this.DeparmentId != other.DeparmentId) {
+            return false;
+        }
+        return true;
+    }
+
     public int getDeparmentId() {
         return DeparmentId;
     }

@@ -6,7 +6,7 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <ui:define name="title">
-        Ana Sayfa
+        Hizmetiçi Eğitim İşlemleri
     </ui:define>
 
     <ui:define name="content">
@@ -33,7 +33,10 @@
                 <h:column>
                     <h:form>
                         <f:facet name="header">İşlemler</f:facet>
+                        <h:commandButton class="btn btn-info" value="Kişileri Düzenle" action="#{TrainingInfoC.EditPersons(t)}"/>
                         <h:commandButton class="btn btn-secondary" value="Düzenle" action="#{TrainingInfoC.setSelectedTraınıng(t)}"/>
+                   
+                    
                     </h:form>
                 </h:column>
 

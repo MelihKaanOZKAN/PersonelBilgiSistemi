@@ -1,5 +1,6 @@
 package dao;
 
+import controller.City;
 import entity.adress;
 import util.ConnectionClass;
 import entity.personalinfo;
@@ -83,18 +84,23 @@ public class adressDao {
          List<adress> clist= new ArrayList<>();
          try {
               ConnectionClass connection = new ConnectionClass();
-            PreparedStatement stm = (PreparedStatement) connection.connection.prepareStatement("select AdressId, Adress,City,District from adress");
+              /* select AdressId, Adress,A.City, C.CityName, A.District, D.DistrictName from adress A
+inner join Citys C on C.CityId = A.City
+inner join Districts D on C.CityId = D.City
+*/
+            PreparedStatement stm = (PreparedStatement) connection.connection.prepareStatement("select AdressId, Adress,City, C.CityName, District, D.Districtname from adress");
             ResultSet rs=stm.executeQuery();
             while(rs.next()){
                 adress tmp = new adress();
-                tmp.setAdressId(rs.getInt("AdressId"));
-                tmp.setAdress(rs.getString("Adress"));
-                clist.add(tmp);
+                tmp.setAdressId(rs.getInt(1));
+                tmp.setAdress(rs.getString(2));
                 
+                clist.add(tmp);
             }
             
              
          } catch (Exception e) {
+             e.printStackTrace();
          }
          return clist;
      }

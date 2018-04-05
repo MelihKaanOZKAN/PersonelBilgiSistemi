@@ -10,13 +10,17 @@ import javax.faces.bean.SessionScoped;
  *
  * @author HakanBey
  */
-@ManagedBean(name="adres")
+@ManagedBean(name="adress")
 @SessionScoped
 public class adressController {
 
     private adressDao cdao;
      private List<adress> clist;
+     private String ScreenCode = "ADS";
 
+    public String getScreenCode() {
+        return ScreenCode;
+    }
     public List<adress> getClist() {
         this.clist= this.getCdao().getAdress();
         return clist;

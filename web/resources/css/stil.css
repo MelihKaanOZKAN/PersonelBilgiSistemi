@@ -71,3 +71,10 @@ body{
 .active{
     background: #2b90f5;
 }
+.tableDiv{
+    width:40%;
+    float:left;
+}
+.formDiv{
+    float:right;
+}

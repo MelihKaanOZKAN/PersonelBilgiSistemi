@@ -5,9 +5,10 @@ import entity.trainingInfo;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean(name = "TrainingInfoC")
-@SessionScoped
+@ViewScoped
 public class TrainingInfoController {
 
     private trainingDao TInfDao;
@@ -15,7 +16,11 @@ public class TrainingInfoController {
     private String ScreenCode = "TIE";
     private trainingInfo selectedTraınıng;
 
-    
+    public String EditPersons(trainingInfo s)
+    {
+        this.selectedTraınıng = s;
+        return "trainees.xhtml";
+    }
     public void Kaydet() {
         if (selectedTraınıng.getTrainingId() == 0) {
             TInfDao.Kaydet(selectedTraınıng);
