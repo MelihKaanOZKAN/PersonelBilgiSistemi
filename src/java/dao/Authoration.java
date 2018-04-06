@@ -36,7 +36,7 @@ public class Authoration {
                 info.setAuthStatus(true);
                 info.getUser().getUserType().setGroupId(rs.getInt(1));
                 info.getUser().setUserId(rs.getInt(2));
-                info.getUser().getuserinfo().setPInfoId(rs.getInt(2));
+                info.getUser().getuserinfo().setPInfoId(rs.getInt(3));
                 info.getUser().getuserinfo().setEName(rs.getString(4));
                 info.getUser().getuserinfo().setESurname(rs.getString(5));
                 info.getUser().getuserinfo().setCitizensShipNumber(rs.getString(6));

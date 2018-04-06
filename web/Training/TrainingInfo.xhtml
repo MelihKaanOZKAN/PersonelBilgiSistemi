@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="title">
+        Hizmetiçi Eğitimler
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="FormDiv">
+            <h:form>
+                <div style="float:left;">
+                    <div class="form-group">
+                        <h:outputText value="Eğitim Adı" />
+                        <h:outputText  class="form-control" value="#{tranieesController2.selectedTrainee.traininginfo.trainingName}" />
+                    </div>
+
+
+                    <div class="form-group">
+                        <h:outputText value="Eğitim Bilgisi" />
+                        <h:outputText  class="form-control" value="#{tranieesController2.selectedTrainee.traininginfo.trainingInfo}" />
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputText value="Başlama Tarihi" />
+                        <h:outputText  class="form-control" value="#{tranieesController2.selectedTrainee.traininginfo.beginDate}">
+                            <f:converter converterId="convertDate"/>
+                        </h:outputText>
+                    </div>
+                    <div class="form-group">
+                        <h:outputText value="Bitiş Tarihi" />
+                        <h:outputText  class="form-control" value="#{tranieesController2.selectedTrainee.traininginfo.endDate}">
+                            <f:converter converterId="convertDate"/>
+                        </h:outputText>
+                    </div>
+                    <div class="form-group">
+                        <h:outputText value="Sınav Tarihi" />
+                        <h:outputText  class="form-control" value="#{tranieesController2.selectedTrainee.traininginfo.examDate}">
+                            <f:converter converterId="convertDate"/>
+                        </h:outputText>
+                    </div>
+                </div>
+                <div style="float:right">
+                    <div class="form-group">
+                        <h:outputText value="Başvuru Onayı" />
+                        <h:outputText class="form-control" rendered="#{tranieesController2.selectedTrainee.appConfirm}" value="Onaylandı" />
+                        <h:outputText class="form-control" rendered="#{!tranieesController2.selectedTrainee.appConfirm}" value="Bekliyor" />   
+                    </div>
+                    <div class="form-group">
+                        <h:outputText value="Eğitime Katılma Durumu" />
+                        <h:outputText class="form-control" rendered="#{tranieesController2.selectedTrainee.participateTraining}" value="Katıldı" />
+                        <h:outputText class="form-control" rendered="#{!tranieesController2.selectedTrainee.participateTraining}" value="Katılmadı" />   
+                    </div>
+                    <div class="form-group">
+                        <h:outputText value="Sınava Katılma Durumu" />
+                        <h:outputText class="form-control" rendered="#{tranieesController2.selectedTrainee.participateExam}" value="Katıldı" />
+                        <h:outputText class="form-control" rendered="#{!tranieesController2.selectedTrainee.participateExam}" value="Katılmadı" />   
+                    </div>
+                    <div class="form-group">
+                        <h:outputText value="Sınavı Geçme Durumu" />
+                        <h:outputText class="form-control" rendered="#{tranieesController2.selectedTrainee.passExam}" value="Geçti" />
+                        <h:outputText class="form-control" rendered="#{!tranieesController2.selectedTrainee.passExam}" value="Kaldı" />   
+                    </div>
+                    <div class="form-group">
+                        <h:outputText value="Sınav Notu" />
+                        <h:outputText class="form-control" value="#{tranieesController2.selectedTrainee.examMark}" />
+                    </div>
+                </div>
+
+            </h:form>
+        </div>
+
+
+    </ui:define>
+
+</ui:composition>

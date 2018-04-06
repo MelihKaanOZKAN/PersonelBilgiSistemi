@@ -8,6 +8,7 @@ package controller;
 import dao.departmenttableDAO;
 import dao.traineesDao;
 import entity.EmployeeInfo;
+import entity.Trainees;
 import entity.departments;
 import entity.trainingInfo;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class tranieesController {
 
     private trainingInfo selectedTraining;
     private List<Integer> Persons;
-    private List<EmployeeInfo> selectedPersons;
+    private List<Trainees> selectedPersons;
     private List<EmployeeInfo> PersonList;
     private List<departments> depList;
     private traineesDao traineeDao;
@@ -43,8 +44,12 @@ public class tranieesController {
     {
         traineeDao.removeTrainee(p, selectedTraining);
     }
+    public void acceptPerson(EmployeeInfo p)
+    {
+        traineeDao.acceptTrainee(p, selectedTraining);
+    }
     public void addPersons(){
-        traineeDao.addTrainees(Persons, selectedTraining);
+        traineeDao.addTrainees(Persons, selectedTraining, true);
     }
     public List<Integer> getPersons() {
         return Persons;
@@ -79,13 +84,13 @@ public class tranieesController {
         this.selectedTraining = selectedTraining;
     }
 
-    public List<EmployeeInfo> getSelectedPersons(trainingInfo info) {
+    public List<Trainees> getSelectedPersons(trainingInfo info) {
         this.selectedTraining = info;
         selectedPersons = traineeDao.selectedPersons(selectedTraining);
         return selectedPersons;
     }
 
-    public void setSelectedPersons(List<EmployeeInfo> selectedPersons) {
+    public void setSelectedPersons(List<Trainees> selectedPersons) {
         this.selectedPersons = selectedPersons;
     }
 

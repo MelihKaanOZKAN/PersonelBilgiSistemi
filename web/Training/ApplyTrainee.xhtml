@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="title">
+        Eğitime Başvur
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="FormDiv">
+            <h:dataTable class="table table-striped" value="#{tranieesController2.getUnAppliedTrainings(auth.info.user.getuserinfo())}" var="t">
+
+                <h:column>
+                    <f:facet name="header">Eğitim Adı</f:facet>
+                        #{t.trainingName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Eğitim Açıklaması</f:facet>
+                        #{t.trainingInfo}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Eğitimin Başlangıç Tarihi</f:facet>
+                    <h:outputText value="#{t.beginDate}">
+                        <f:converter converterId="convertDate"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Eğitimin Bitiş Tarihi</f:facet>
+                    <h:outputText value="#{t.endDate}">
+                        <f:converter converterId="convertDate"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Sınav Tarihi</f:facet>
+                    <h:outputText value="#{t.examDate}">
+                        <f:converter converterId="convertDate"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <h:form>
+                        <f:facet name="header">İşlemler</f:facet>
+                        <h:commandButton class="btn btn-info" type="submit" value="Başvur" action="#{tranieesController2.Apply(auth.info.user.getuserinfo(), t)}"/>
+                    </h:form>
+                </h:column>
+
+            </h:dataTable>
+        </div>
+        <div class="ButtonDiv">
+
+        </div>
+
+    </ui:define>
+
+</ui:composition>

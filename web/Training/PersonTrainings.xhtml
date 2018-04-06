@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="title">
+        Hizmetiçi Eğitimler
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="FormDiv">
+            <h:form>
+            <h:commandButton class="btn btn-dark" value="Eğitime başvur" action="ApplyTrainee"/>
+            </h:form>
+            <h:dataTable class="table table-striped" value="#{tranieesController2.getTList(auth.info.user.getuserinfo())}" var="t">
+
+                <h:column>
+                    <f:facet name="header">Eğitim Adı</f:facet>
+                        #{t.traininginfo.trainingName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Eğitimin Başlangıç Tarihi</f:facet>
+                    <h:outputText value="#{t.traininginfo.beginDate}">
+                        <f:converter converterId="convertDate"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Eğitimin Bitiş Tarihi</f:facet>
+                    <h:outputText value="#{t.traininginfo.endDate}">
+                        <f:converter converterId="convertDate"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Sınav Tarihi</f:facet>
+                    <h:outputText value="#{t.traininginfo.examDate}">
+                        <f:converter converterId="convertDate"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Onay Durumu</f:facet>
+                    <h:outputText rendered="#{t.appConfirm}" value="Onaylandı"/>
+                     <h:outputText rendered="#{!t.appConfirm}" value="Bekliyor"/>   
+                </h:column>
+                <h:column>
+                    <h:form>
+                        <f:facet name="header">İşlemler</f:facet>
+                        <h:commandButton class="btn btn-info" value="AÇ" action="#{tranieesController2.openPage(t)}"/>
+                    </h:form>
+                </h:column>
+
+            </h:dataTable>
+        </div>
+        <div class="ButtonDiv">
+
+        </div>
+
+    </ui:define>
+
+</ui:composition>

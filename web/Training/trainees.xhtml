@@ -15,24 +15,25 @@
 
                 <h:column>
                     <f:facet name="header">Kisi Adı</f:facet>
-                        #{t.pinfo.EName}
+                        #{t.personInfo.pinfo.EName}
                 </h:column>
                 <h:column>
                     <f:facet name="header">Kisi Soyadı</f:facet>
-                        #{t.pinfo.ESurname}
+                        #{t.personInfo.pinfo.ESurname}
                 </h:column>
                 <h:column>
                     <f:facet name="header">Kişinin Çalıştığı Departman</f:facet>
-                        #{t.department.departmentName}
+                        #{t.personInfo.department.departmentName}
                 </h:column>
                 <h:column>
                     <f:facet name="header">Kişinin Görevi</f:facet>
-                        #{t.job.jobName}
+                        #{t.personInfo.job.jobName}
                 </h:column>
                 <h:column>
                     <f:facet name="header">İşlemler</f:facet>
                     <h:form>
-                    <h:commandButton class="btn btn-danger" value="Sil" action="#{tranieesController.removePerson(t)}" onclick="if (!confirm('Seçili Kişi Silinecek?')) {
+                        <h:commandButton rendered="#{!t.appConfirm}" class="btn btn-success" value="Onayla" action="#{tranieesController.acceptPerson(t.personInfo)}"/>
+                                         <h:commandButton class="btn btn-danger" value="Sil" action="#{tranieesController.removePerson(t.personInfo)}" onclick="if (!confirm('Seçili Kişi Silinecek?')) {
                                     return false;
                                 }
                                 ;

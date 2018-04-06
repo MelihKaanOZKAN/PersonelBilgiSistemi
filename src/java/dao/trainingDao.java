@@ -7,6 +7,7 @@ package dao;
 
 import com.mysql.jdbc.PreparedStatement;
 import converter.dateConverter;
+import entity.EmployeeInfo;
 import entity.trainingInfo;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -26,19 +27,33 @@ public class trainingDao {
 
     ConnectionClass connect = new ConnectionClass();
 
-    private java.sql.Date convertDate(String string)
-    {
-           java.util.Date date = null;
+    public List<trainingInfo> getUnAppliedTrainings(EmployeeInfo info) {
+        List<trainingInfo> result = new ArrayList<>();
         try {
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-            string = string.replace('-','/');
-           date  = format.parse(string);
-        } catch (ParseException ex) {
+            String sql ="select TI.TraningId, TI.TrainingName, TI.TrainingInfo, TI.BeginDate, TI.EndDate, TI.ExamDate,TR.PersonId from TrainingInfo TI " +
+"left join trainees TR on  TI.TraningId=TR.TrainingID " +
+"where TR.PersonId != ? or TR.TrainingID is null";
+
+            PreparedStatement pstm = (PreparedStatement) connect.connection.prepareStatement(sql);
+            pstm.setInt(1, info.getPinfo().getPInfoId());
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                trainingInfo t = new trainingInfo();
+                t.setTrainingId(rs.getInt("TraningId"));
+                t.setTrainingName(rs.getString("TrainingName"));
+                t.setTrainingInfo(rs.getString("TrainingInfo"));
+                t.setBeginDate(rs.getDate("BeginDate"));
+                t.setEndDate(rs.getDate("EndDate"));
+                t.setExamDate(rs.getDate("ExamDate"));
+                result.add(t);
+            }
+        } catch (SQLException ex) {
+
             ex.printStackTrace();
         }
-        java.sql.Date dt = new java.sql.Date(date.getTime());
-        return dt;
+        return result;
     }
+
     public List<trainingInfo> getTrainingList() {
         List<trainingInfo> result = new ArrayList<>();
         try {
@@ -54,11 +69,11 @@ public class trainingDao {
                 t.setTrainingId(rs.getInt("TraningId"));
                 t.setTrainingName(rs.getString("TrainingName"));
                 t.setTrainingInfo(rs.getString("TrainingInfo"));
-                
+
                 t.setBeginDate(rs.getDate("BeginDate"));
 
-               t.setEndDate(rs.getDate("EndDate"));
-               t.setExamDate(rs.getDate("ExamDate"));
+                t.setEndDate(rs.getDate("EndDate"));
+                t.setExamDate(rs.getDate("ExamDate"));
                 result.add(t);
             }
         } catch (SQLException ex) {
