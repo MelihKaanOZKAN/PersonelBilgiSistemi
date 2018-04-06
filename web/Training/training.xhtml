@@ -20,23 +20,29 @@
 
                 <h:column>
                     <f:facet name="header">Eğitimin Başlangıç Tarihi</f:facet>
-                        #{t.beginDate}
+                    <h:outputText value="#{t.beginDate}">
+                        <f:converter converterId="convertDate"/>
+                    </h:outputText>
                 </h:column>
                 <h:column>
                     <f:facet name="header">Eğitimin Bitiş Tarihi</f:facet>
-                        #{t.endDate}
+                    <h:outputText value="#{t.endDate}">
+                        <f:converter converterId="convertDate"/>
+                    </h:outputText>
                 </h:column>
                 <h:column>
                     <f:facet name="header">Sınav Tarihi</f:facet>
-                        #{t.examDate}
+                    <h:outputText value="#{t.examDate}">
+                        <f:converter converterId="convertDate"/>
+                    </h:outputText>
                 </h:column>
                 <h:column>
                     <h:form>
                         <f:facet name="header">İşlemler</f:facet>
                         <h:commandButton class="btn btn-info" value="Kişileri Düzenle" action="#{TrainingInfoC.EditPersons(t)}"/>
                         <h:commandButton class="btn btn-secondary" value="Düzenle" action="#{TrainingInfoC.setSelectedTraınıng(t)}"/>
-                   
-                    
+
+
                     </h:form>
                 </h:column>
 

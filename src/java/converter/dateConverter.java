@@ -38,8 +38,9 @@ public class dateConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
-        Date date = (Date) o;
-        return date.toString();
+        java.util.Date date = (java.util.Date) o;
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.format(date);
     }
     
 }

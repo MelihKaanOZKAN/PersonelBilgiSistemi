@@ -23,8 +23,9 @@ public class Authoration {
 
         try {
             ConnectionClass connect = new ConnectionClass();
-            PreparedStatement stm = (PreparedStatement) connect.connection.prepareStatement("SELECT UserType, UserId, PersonId, EName, ESurname, CitizensShipNumber FROM Users U "
+            PreparedStatement stm = (PreparedStatement) connect.connection.prepareStatement("SELECT UserType, UserId, PersonId, EName, ESurname, CitizensShipNumber, UT.TypeName FROM Users U "
                     + "inner join PErsonalInfo PI on PI.PInfoId = U.PersonId "
+                    + "inner join UserTypes UT on U.UserType=UT.UserTypeId "
                     + " WHERE Username=? AND Password=?");
             stm.setString(1, info.getUser().getUserName());
             stm.setString(2, info.getUser().getPassword());
@@ -39,6 +40,7 @@ public class Authoration {
                 info.getUser().getuserinfo().setEName(rs.getString(4));
                 info.getUser().getuserinfo().setESurname(rs.getString(5));
                 info.getUser().getuserinfo().setCitizensShipNumber(rs.getString(6));
+                info.getUser().getUserType().setGroupName(rs.getString(7));
                 info.getUser().setUserType(groupPermDao.getGroupPerms(info.getUser().getUserType()));
             }
         } catch (SQLException ex) {

@@ -8,7 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 @ManagedBean(name = "TrainingInfoC")
-@ViewScoped
+@SessionScoped
 public class TrainingInfoController {
 
     private trainingDao TInfDao;

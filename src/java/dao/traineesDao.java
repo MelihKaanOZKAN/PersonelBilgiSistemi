@@ -40,7 +40,7 @@ public class traineesDao {
 
     public void addTrainees(List<Integer> Persons, trainingInfo selectedTraining) {
         try {
-            String sql = "INSERT INTO trainees (TrainingID, PersonId) VALUES (?,?)";
+            String sql = "INSERT INTO trainees (TrainingID, PersonId, AppConfirm) VALUES (?,?,1)";
             PreparedStatement s = (PreparedStatement) con.connection.prepareStatement(sql);
             for (int i = 0; i < Persons.size(); i++) {
                 s.setInt(1, selectedTraining.getTrainingId());
