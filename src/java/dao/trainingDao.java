@@ -30,9 +30,8 @@ public class trainingDao {
     public List<trainingInfo> getUnAppliedTrainings(EmployeeInfo info) {
         List<trainingInfo> result = new ArrayList<>();
         try {
-            String sql ="select TI.TraningId, TI.TrainingName, TI.TrainingInfo, TI.BeginDate, TI.EndDate, TI.ExamDate,TR.PersonId from TrainingInfo TI " +
-"left join trainees TR on  TI.TraningId=TR.TrainingID " +
-"where TR.PersonId != ? or TR.TrainingID is null";
+            String sql ="select TI.TraningId, TI.TrainingName, TI.TrainingInfo, TI.BeginDate, TI.EndDate, TI.ExamDate from TrainingInfo TI " +
+"where TI.TraningId not in  ( select TrainingId from trainees where PersonId = ?)";
 
             PreparedStatement pstm = (PreparedStatement) connect.connection.prepareStatement(sql);
             pstm.setInt(1, info.getPinfo().getPInfoId());

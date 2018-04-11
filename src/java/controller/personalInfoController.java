@@ -1,6 +1,7 @@
 package controller;
 
 import dao.personalinfoDao;
+import entity.EmployeeInfo;
 import entity.personalinfo;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,23 +13,26 @@ import javax.faces.bean.ManagedBean;
 @SessionScoped
 public class personalInfoController implements Serializable {
 
-    private List<personalinfo> clist;
+    private List<EmployeeInfo> clist;
     private personalinfoDao personalDao;
 
-    private personalinfo personal;
+    private EmployeeInfo personal;
 
     public personalInfoController() {
         this.clist = new ArrayList<>();
     }
-
-    public String izinIslem(personalinfo person){
+public String emergency(EmployeeInfo person){
+        this.personal = person;
+        return "emergencyInfo";
+    }
+    public String izinIslem(EmployeeInfo person){
         this.personal = person;
         return "izinislemleri";
     }
-    public String updateForm(personalinfo person)
+    public String updateForm(EmployeeInfo person)
     {
         this.personal=person;
-        return "persons";
+        return "addPerson";
     }
     
     public String update(personalinfo person)
@@ -37,34 +41,34 @@ public class personalInfoController implements Serializable {
         return "persons";
     }
     
-    public String delete(personalinfo person)
+    public String delete(EmployeeInfo person)
     {
-        this.getPersonalDao().deletePersonal(person);
+        this.getPersonalDao().deletePersonal(person.getPinfo());
         return "persons";
     }
     
     public String create() {
-        this.getPersonalDao().addPersonal(this.personal);
+        this.getPersonalDao().addPersonal(this.personal.getPinfo());
         return "addPerson";
     }
 
-    public List<personalinfo> getClist() {
+    public List<EmployeeInfo> getClist() {
         this.clist = this.getPersonalDao().getPersonal();
         return clist;
     }
 
-    public void setClist(List<personalinfo> clist) {
+    public void setClist(List<EmployeeInfo> clist) {
         this.clist = clist;
     }
 
-    public personalinfo getPersonal() {
+    public EmployeeInfo getPersonal() {
         if (this.personal == null) {
-            this.personal = new personalinfo();
+            this.personal = new EmployeeInfo();
         }
         return personal;
     }
 
-    public void setPersonal(personalinfo personal) {
+    public void setPersonal(EmployeeInfo personal) {
         this.personal = personal;
     }
 

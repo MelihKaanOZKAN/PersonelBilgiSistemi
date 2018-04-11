@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="title">
+       Acil Durum Bilgisi
+    </ui:define>
+
+    <ui:define name="content">
+
+        <div class="izinformdiv">
+             <h:dataTable class="table table-striped" value="#{emergencyinfo.getClist(Personal.personal)}" var="bilgi">
+                    
+                    <h:column>
+                        <f:facet name="header">İSİM SOYİSİM</f:facet>
+                            #{bilgi.nameSurname}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">TELEFON</f:facet>
+                            #{bilgi.phone}
+                    </h:column>
+                </h:dataTable>
+
+        </div>
+
+    </ui:define>
+
+</ui:composition>

@@ -90,7 +90,7 @@ public class traineesDao {
                     + "inner join departments d on d.DepartmentId = e.Department "
                     + "inner join jobs j on j.JobId = e.JobId "
                     + "where t.TrainingID = ? "
-                    + "group by t.AppConfirm ASC";
+                    + "order by t.AppConfirm ASC";
             PreparedStatement s = (PreparedStatement) con.connection.prepareStatement(sql);
             s.setInt(1, info.getTrainingId());
             ResultSet rs = s.executeQuery();
@@ -122,18 +122,19 @@ public class traineesDao {
         return result;
     }
 
-    public List<EmployeeInfo> PersonList(departments info) {
+    public List<EmployeeInfo> PersonList(departments info, trainingInfo tinfo) {
         List<EmployeeInfo> result = new ArrayList<>();
 
         try {
-            String sql = "select InfoId, P.EName, P.ESurname, d.DepartmentId, d.DepartmentName, j.JobId, j.JobName  FROM employeeinfo e "
-                    + "inner join personalinfo P on P.PInfoId=e.InfoId "
-                    + "left join trainees t on t.PersonId = P.PInfoId "
-                    + "inner join departments d on d.DepartmentId = e.Department and d.DepartmentId = ? "
-                    + "inner join jobs j on j.JobId = e.JobId "
-                    + "where t.TrainingID is null;";
+            String sql = "select distinct  InfoId, P.EName, P.ESurname, d.DepartmentId, d.DepartmentName, j.JobId, j.JobName  FROM employeeinfo e " +
+"                    inner join personalinfo P on P.PInfoId=e.InfoId " +
+"                    left join trainees t on t.PersonId = P.PInfoId and t.TrainingID =? " +
+"                    inner join departments d on d.DepartmentId = e.Department and d.DepartmentId = ? " +
+"                    inner join jobs j on j.JobId = e.JobId " +
+"                    where t.PersonId is null";
             PreparedStatement s = (PreparedStatement) con.connection.prepareStatement(sql);
-            s.setInt(1, info.getDeparmentId());
+            s.setInt(2, info.getDeparmentId());
+            s.setInt(1, tinfo.getTrainingId());
             ResultSet rs = s.executeQuery();
 
             while (rs.next()) {

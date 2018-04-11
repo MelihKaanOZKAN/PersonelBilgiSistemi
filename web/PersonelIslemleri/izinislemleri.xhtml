@@ -12,7 +12,7 @@
     <ui:define name="content">
 
         <div class="izinformdiv">
-            <h:dataTable class="table table-striped" value="#{PersonInfoPermit.getPermitList(Personal.personal)}" var="permit">
+            <h:dataTable class="table table-striped" value="#{PersonInfoPermit.getPermitList(Personal.personal.pinfo)}" var="permit">
 
                 <h:column>
                     <f:facet name="header">ID</f:facet>

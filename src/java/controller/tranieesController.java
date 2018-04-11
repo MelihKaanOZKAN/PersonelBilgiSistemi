@@ -101,7 +101,7 @@ public class tranieesController {
     }
     public List<EmployeeInfo> getPersonList() {
         
-        PersonList = traineeDao.PersonList(this.getSelectedDepartment());
+        PersonList = traineeDao.PersonList(this.getSelectedDepartment(),selectedTraining);
         return PersonList;
     }
 
