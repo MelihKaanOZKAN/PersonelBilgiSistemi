@@ -7,6 +7,7 @@ package dao;
 
 import com.mysql.jdbc.PreparedStatement;
 import entity.LoginUserInfo;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import util.ConnectionClass;
@@ -15,7 +16,7 @@ import util.ConnectionClass;
  *
  * @author Casper
  */
-public class Authoration {
+public class Authoration implements Serializable{
 
     AdminPanel_UserGroupPerms groupPermDao = new AdminPanel_UserGroupPerms();
 

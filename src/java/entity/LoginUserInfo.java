@@ -13,11 +13,29 @@ import javax.faces.bean.SessionScoped;
  *
  * @author Syste
  */
-@ManagedBean(name="authUserInfo")
+@ManagedBean(name = "authUserInfo")
 @SessionScoped
 public class LoginUserInfo {
+
     private boolean authStatus = false;
     private User user;
+
+    private String getLink(Perms p,  String Context)
+    {
+        return Context+"/faces" +p.perm.getPermLink();
+    }
+    public boolean hasPerm(String url, String Context) {
+        boolean result = false;
+        for (int i = 0; i < user.getUserType().getGroupPerms(false).size(); i++) {
+            String permLink = this.getLink(user.getUserType().getGroupPerms(false).get(i), Context);
+                    
+            if (url.equals(permLink)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
 
     public LoginUserInfo() {
         user = new User();
@@ -31,8 +49,6 @@ public class LoginUserInfo {
         this.user = user;
     }
 
-   
-    
     public boolean isAuthStatus() {
         return authStatus;
     }
@@ -40,5 +56,5 @@ public class LoginUserInfo {
     public void setAuthStatus(boolean authStatus) {
         this.authStatus = authStatus;
     }
-    
+
 }

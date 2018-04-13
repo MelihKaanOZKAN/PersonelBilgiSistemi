@@ -6,8 +6,8 @@ import entity.personalinfo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "Personal")
 @SessionScoped
@@ -23,16 +23,16 @@ public class personalInfoController implements Serializable {
     }
 public String emergency(EmployeeInfo person){
         this.personal = person;
-        return "emergencyInfo";
+        return "/emergencyInfo.xhtml?faces-redirect=true";
     }
     public String izinIslem(EmployeeInfo person){
         this.personal = person;
-        return "izinislemleri";
+        return "/izinislemleri.xhtml?faces-redirect=true";
     }
     public String updateForm(EmployeeInfo person)
     {
         this.personal=person;
-        return "addPerson";
+        return "/addPerson.xhtml?faces-redirect=true";
     }
     
     public String update(personalinfo person)

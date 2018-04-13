@@ -7,6 +7,7 @@ package controller;
 
 import dao.annonsmentDao;
 import entity.Annons;
+import entity.UserGroup;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,14 +16,75 @@ import javax.faces.bean.SessionScoped;
  *
  * @author Syste
  */
-    @ManagedBean(name="Annons")
-    @SessionScoped
+@ManagedBean(name = "Annons")
+@SessionScoped
 public class AnnonsController {
-    private annonsmentDao dao = new annonsmentDao();
-    List<Annons> AnnonsList;
 
-    public List<Annons> getAnnonsList(int GroupId) {
-        AnnonsList = dao.getAnnons(GroupId);
+    private annonsmentDao dao = new annonsmentDao();
+    private List<Annons> AnnonsList;
+    private Annons selected;
+    private String ScreenCode = "AnnonsCon";
+    private int group;
+
+    public void delete(){
+        dao.deleteAnnons(selected);
+        selected = new Annons();
+        this.getSelected().getGroup().setGroupId(group);
+    }
+    public void update(){
+        if(selected.getId() == 0)
+        {
+            dao.addAnnons(selected);
+        }
+        else{
+            dao.updateAnnons(selected);
+        }
+        selected = new Annons();
+        this.getSelected().getGroup().setGroupId(group);
+    }
+    public int getGroup() {
+        return group;
+    }
+
+    public void setGroup(int group) {
+        this.getSelected().getGroup().setGroupId(group);
+        this.group = group;
+    }
+    public void setCurrentAnnos(Annons a) {
+        selected = a;
+    }
+
+    public String getScreenCode() {
+        return ScreenCode;
+    }
+
+    public boolean isGroupSelected() {
+        if (this.group == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public Annons getSelected() {
+        if (selected == null) {
+            selected = new Annons();
+        }
+        return selected;
+    }
+
+    public void setSelected(Annons selected) {
+        this.selected = selected;
+    }
+
+    public List<Annons> getAnnonsList(UserGroup group, Boolean Mode) {
+        if(Mode)
+        {
+            AnnonsList = dao.getAnnons(group);
+        }
+        else{
+             AnnonsList = dao.getAllAnnons(group);
+        }
         return AnnonsList;
     }
 

@@ -5,13 +5,24 @@
  */
 package entity;
 
+import javax.faces.context.FacesContext;
+
 /**
  *
  * @author Syste
  */
 public class Perms_Perm {
-    public String permName, PermLink, ScreenCode;
+    private String permName, PermLink, ScreenCode;
+    private boolean ViewMenu;
 
+    public boolean isViewMenu() {
+        return ViewMenu;
+    }
+
+    public void setViewMenu(boolean ViewMenu) {
+        this.ViewMenu = ViewMenu;
+    }
+    
     public String getScreenCode() {
         return ScreenCode;
     }
@@ -39,7 +50,9 @@ public class Perms_Perm {
     public String getPermLink() {
         return PermLink;
     }
-
+    public String Redirect() {
+        return PermLink + "?faces-redirect=true";
+    }
     public void setPermLink(String PermLink) {
         this.PermLink = PermLink;
     }

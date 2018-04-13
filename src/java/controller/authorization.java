@@ -37,10 +37,10 @@ public class authorization implements Serializable {
     public boolean isAuthorized2Visual(String ScreenCode)
     {
         boolean result = false;
-        List<Perms> tmp = info.getUser().getUserType().getGroupPerms();
+        List<Perms> tmp = info.getUser().getUserType().getGroupPerms(false);
         for(int i = 0; i < tmp.size(); i++)
         {
-            if(tmp.get(i).getPerm().ScreenCode.equalsIgnoreCase(ScreenCode))
+            if(tmp.get(i).getPerm().getScreenCode().equalsIgnoreCase(ScreenCode))
             {
                 result= tmp.get(i).isPermVisual();
             }
@@ -50,10 +50,10 @@ public class authorization implements Serializable {
     public boolean isAuthorized2Set(String ScreenCode)
     {
         boolean result = false;
-        List<Perms> tmp = info.getUser().getUserType().getGroupPerms();
+        List<Perms> tmp = info.getUser().getUserType().getGroupPerms(false);
         for(int i = 0; i < tmp.size(); i++)
         {
-            if(tmp.get(i).getPerm().ScreenCode.equalsIgnoreCase(ScreenCode))
+            if(tmp.get(i).getPerm().getScreenCode().equalsIgnoreCase(ScreenCode))
             {
                 result= tmp.get(i).isPermSet();
             }
@@ -63,11 +63,12 @@ public class authorization implements Serializable {
    
     // if auth result isnt success, PersonInfo etc. wont defined.
     public String getAuthorized(){
-        String result = "index";
+        String result = "/index?faces-redirect=true";
         info = auth.getAuthorize(info);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", info);
         if(info.isAuthStatus())
         {
-            result = "main";
+            result = "/main.xhtml?faces-redirect=true";
         }
         else {
                 WrongPass=!info.isAuthStatus();

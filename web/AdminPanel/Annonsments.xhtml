@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="title">
+        Ana Sayfa
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="FormDiv">
+            <h:form>
+                Grup Seçimi:
+                <h:selectOneMenu class="custom-select custom-select-lg mb-3" value="#{Annons.group}">
+                    <f:selectItems value="#{AdminPage_UserGroups.getPermGroupList()}" var="d" itemValue="#{d.groupId}" itemLabel="#{d.groupName}"/>
+                </h:selectOneMenu>
+                <h:commandButton class="btn btn-secondary" value="Duyuruları Getir"  type="submit"/>
+            </h:form>
+
+            <h:form>
+                <h:dataTable class="table table-striped" rendered="#{Annons.isGroupSelected()}" value="#{Annons.getAnnonsList(Annons.selected.group, false)}" var="a">
+
+                    <h:column class="table table-hover">
+                        <f:facet name="header">Duyuru Metni</f:facet>
+                            #{a.text}
+                    </h:column>
+                    <h:column class="table table-hover">
+                        <f:facet name="header">Aktif Mi?</f:facet>
+                        <h:selectBooleanCheckbox  value="#{a.active}" disabled="true"/>
+                    </h:column>
+                    <h:column headerClass="table-hover" rendered="#{auth.isAuthorized2Set(Annons.screenCode)}">
+                        <center>
+                            <f:facet name="header">İşlemler</f:facet>
+                            <div class="btn-group">
+                                <h:commandButton class="btn btn-info" action="#{Annons.setCurrentAnnos(a)}" value="Düzenle"></h:commandButton>
+                            </div>
+                        </center>
+
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+
+        <div class="ButtonDiv">
+            <h:form rendered="#{Annons.isGroupSelected()}">
+                <div class="form-group">
+                    <h:outputText class="formText" value="Duyuru Metni:"/> 
+                    <h:inputTextarea class="form-control" value="#{Annons.selected.text}" required="true"/>
+                </div>
+                <div class="form-group">
+                    <h:outputText class="formText" value="Aktif Mi?:"/> 
+                    <h:selectBooleanCheckbox class="checkBox" value="#{Annons.selected.active}"/>
+                </div>
+                <div class="form-group">
+                    <h:commandButton class="btn btn-primary" value="Kaydet" action="#{Annons.update()}"/>
+                    <h:commandButton class="btn btn-danger btnproperties" value="Sil" onclick="return confirm('Seçili duyuru silinecektir. Onaylıyor musunuz?')
+                                     " action="#{Annons.delete()}"/>
+                </div>
+            </h:form>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

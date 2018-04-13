@@ -11,10 +11,22 @@ package entity;
  */
 public class Annons {
     private int Id;
-    private int GroupId;
+    private UserGroup Group;
     private String Text;
     private boolean Active;
 
+    public UserGroup getGroup() {
+        if(Group == null)
+            Group = new UserGroup();
+        return Group;
+    }
+
+    public void setGroup(UserGroup Group) {
+        this.Group = Group;
+    }
+
+    
+    
     public int getId() {
         return Id;
     }
@@ -23,14 +35,7 @@ public class Annons {
         this.Id = Id;
     }
 
-    public int getGroupId() {
-        return GroupId;
-    }
-
-    public void setGroupId(int GroupId) {
-        this.GroupId = GroupId;
-    }
-
+    
     public String getText() {
         return Text;
     }

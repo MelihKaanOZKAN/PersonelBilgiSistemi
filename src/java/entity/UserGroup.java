@@ -5,6 +5,7 @@
  */
 package entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,8 +17,19 @@ public class UserGroup {
    private String GroupName;
     private List<Perms> GroupPerms;
 
-    public List<Perms> getGroupPerms() {
-        return GroupPerms;
+    public List<Perms> getGroupPerms(boolean mode) {
+        List<Perms> tmp = new ArrayList<>(GroupPerms);
+        if(mode)
+        {
+            for(int i = 0; i < tmp.size(); i++)
+            {
+                if(!tmp.get(i).perm.isViewMenu())
+                {
+                    tmp.remove(i);
+                }
+            }
+        }
+        return tmp;
     }
 
     public void setGroupPerms(List<Perms> GroupPerms) {
@@ -39,6 +51,28 @@ public class UserGroup {
 
     public void setGroupName(String GroupName) {
         this.GroupName = GroupName;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 17 * hash + this.GroupId;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UserGroup other = (UserGroup) obj;
+        if (this.GroupId != other.GroupId) {
+            return false;
+        }
+        return true;
     }
    
 }

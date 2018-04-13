@@ -1,4 +1,7 @@
-
+.annons{
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
 body{
     background-image: url("/PersonelBilgiSistemi/faces/resources/img/back0.png");
 }

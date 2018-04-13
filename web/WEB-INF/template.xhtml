@@ -11,6 +11,7 @@
         <h:outputStylesheet  library = "css" name="bootstrap.min.css"/>
         <h:outputStylesheet library = "css" name="stil.css" />
         <h:outputStylesheet library = "css" name="AdminPanel.css"/>
+        <h:outputStylesheet library = "css" name="w3.css"/>
 
     </h:head>
     <body>
@@ -62,10 +63,10 @@
 
 
             <div class="menu">             
-                <h:dataTable border="1" width="200"  value="#{auth.info.user.userType.groupPerms}"  var="perm">
+                <h:dataTable border="1" width="200"  value="#{auth.info.user.userType.getGroupPerms(true)}"  var="perm">
                     <h:column>
                         <h:form class="#{auth.getCurrentRowStyle(perm.perm.getPermLink())}">
-                            <h:commandLink action = "#{perm.perm.getPermLink()}">
+                            <h:commandLink action = "#{perm.perm.Redirect()}">
                                 <div class="MenuRow">
                                     <div style="padding-top:10px " >
                                         <h:outputText value="#{perm.perm.permName}"/>

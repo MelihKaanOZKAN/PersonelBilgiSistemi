@@ -55,7 +55,7 @@ public class AdminPanel_UserGroupPerms {
     public List<Perms> getPermList(UserGroup group) {
         List<Perms> result = new ArrayList<>();
         try {
-            String sql = "SELECT PermId, PermName , PermLink, ScreenCode FROM Perms P " +
+            String sql = "SELECT PermId, PermName , PermLink, ScreenCode, ViewMenu FROM Perms P " +
 "            left join UserPerms UP on p.PermId = UP.permissionid " +
 "            and UP.UserTypeId = ? " +
 "            where UP.UserTypeId is null ";
@@ -69,6 +69,7 @@ public class AdminPanel_UserGroupPerms {
                 tmp.getPerm().setPermName(rs.getString(2));
                 tmp.getPerm().setPermLink(rs.getString(3));
                 tmp.getPerm().setScreenCode(rs.getString(4));
+                tmp.getPerm().setViewMenu(rs.getBoolean(5));
                 result.add(tmp);
             }
 
@@ -82,7 +83,7 @@ public class AdminPanel_UserGroupPerms {
   
         try {
             List<Perms> result = new ArrayList<>();
-            String sql = "select PermissionId, pr.PermName, pr.PermLink, pr.ScreenCode, PermVisual, PermSet from UserPerms UP\n" +
+            String sql = "select PermissionId, pr.PermName, pr.PermLink, pr.ScreenCode, pr.ViewMenu, PermVisual, PermSet from UserPerms UP\n" +
             "inner join Perms pr on pr.PermId = UP.PermissionId\n" +
             "where UP.UserTypeId=?"
                     + " ORDER BY pr.PermName ASC;";
@@ -96,8 +97,9 @@ public class AdminPanel_UserGroupPerms {
                 tmp.getPerm().setPermName(rs.getString(2));
                 tmp.getPerm().setPermLink(rs.getString(3));
                 tmp.getPerm().setScreenCode(rs.getString(4));
-                tmp.setPermVisual(rs.getBoolean(5));
-                tmp.setPermSet(rs.getBoolean(6));
+                tmp.getPerm().setViewMenu(rs.getBoolean(5));
+                tmp.setPermVisual(rs.getBoolean(6));
+                tmp.setPermSet(rs.getBoolean(7));
                 result.add(tmp);
             }
             group.setGroupPerms(result);

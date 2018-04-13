@@ -51,7 +51,7 @@
         </div>
         <div style="margin-left: 25px; float:left">
             <h:form>
-                <h:dataTable class="table table-dark table-striped" border="1" width="600"  value="#{AdminPage_UserGroups.currentGroup4Perm.groupPerms}"  var="perm">
+                <h:dataTable class="table table-dark table-striped" border="1" width="600"  value="#{AdminPage_UserGroups.currentGroup4Perm.getGroupPerms(false)}"  var="perm">
                     <h:column>
                         <f:facet name="header">ID</f:facet>
                             #{perm.perm.permId}

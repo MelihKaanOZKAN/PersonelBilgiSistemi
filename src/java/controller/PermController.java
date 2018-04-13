@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import util.Pagination;
 
 /**
  *
@@ -25,7 +26,13 @@ public class PermController implements Serializable {
     private List<Perms_Perm> permList;
     private AdminPanel_Perms permDao = new AdminPanel_Perms();
     private String ScreenCode = "AYI";
+    private Pagination page = new Pagination();
 
+    public Pagination getPage() {
+        return page;
+    }
+    
+    
     public String getScreenCode() {
         return ScreenCode;
     }
@@ -35,7 +42,9 @@ public class PermController implements Serializable {
     }
 
     public List<Perms_Perm> getPermList() {
-        permList = permDao.getPermList();
+        page.setRowCount(permDao.getRowCount());
+        page.setRowLimit(2);
+        permList = permDao.getPermList(page);
         return permList;
     }
 

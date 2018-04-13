@@ -48,12 +48,12 @@ public class UserGroupController implements Serializable {
     public String ChangeGroupPerms(UserGroup selected)
     {
         currentGroup4Perm = selected;
-        return "/AdminPanel/UserGroupPerms.xhtml";
+        return "/AdminPanel/UserGroupPerms.xhtml?faces-redirect=true";
     }
     public String UsersAddDelete(UserGroup selected)
     {
         currentGroup4Perm = selected;
-        return "/AdminPanel/Users.xhtml";
+        return "/AdminPanel/Users.xhtml?faces-redirect=true";
     }
     public void setCurrent(UserGroup current) {
         this.current = current;
