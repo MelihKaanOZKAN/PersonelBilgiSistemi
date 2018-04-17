@@ -42,7 +42,7 @@ public class Authoration implements Serializable{
                 info.getUser().getuserinfo().setESurname(rs.getString(5));
                 info.getUser().getuserinfo().setCitizensShipNumber(rs.getString(6));
                 info.getUser().getUserType().setGroupName(rs.getString(7));
-                info.getUser().setUserType(groupPermDao.getGroupPerms(info.getUser().getUserType()));
+                info.getUser().setUserType(groupPermDao.getGroupPerms(info.getUser().getUserType(), null));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

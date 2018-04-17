@@ -6,6 +6,7 @@
 package controller;
 
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import dao.Users;
 import dao.personalinfoDao;
 import entity.User;
@@ -13,6 +14,7 @@ import entity.UserGroup;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import util.Pagination;
 
 /**
  *
@@ -27,7 +29,17 @@ public class UserController {
     private User selectedUser;
     private Users userDao = new Users();
     private personalinfoDao PinfoDao = new personalinfoDao();
+    private Pagination page = new Pagination();
+    private boolean isErrorActive;
 
+    public boolean isIsErrorActive() {
+        return isErrorActive;
+    }
+    
+    public Pagination getPage() {
+        return page;
+    }
+    
     private boolean buttonsActive = false;
 
     public boolean isButtonsActive() {
@@ -52,20 +64,25 @@ public class UserController {
     }
 
     public List<User> getUserList(UserGroup selectedGroup) {
-        setSelectedGroup(selectedGroup);
-        userList = userDao.getUserList(selectedGroup);
+        this.setSelectedGroup(selectedGroup);
+        page.setRowCount(userDao.getCount(selectedGroup));
+        page.setRowLimit(2);
+        userList = userDao.getUserList(selectedGroup, page);
         return userList;
     }
 
     public void addUpdate() {
         if (!("".equals(selectedUser.getuserinfo().getEName()))) {
             if (selectedUser.getUserId() == 0) {
-                userDao.addUser(selectedUser);
+                    this.isErrorActive = !userDao.addUser(selectedUser);
             } else {
                 userDao.updateUser(selectedUser);
+                
             }
-
-            selectedUser = new User();
+            if(!this.isErrorActive)
+            {
+             selectedUser = new User();
+            }
         }
     }
 

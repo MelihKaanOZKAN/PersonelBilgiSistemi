@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import util.Pagination;
 
 /**
  *
@@ -20,12 +21,18 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name="AdminPage_UserGroups")
 @SessionScoped
 public class UserGroupController implements Serializable {
-    UserGroup current = new UserGroup();
-    List<UserGroup> UserGroupList;
-    AdminPanel_UserGroup UserGroupDao = new AdminPanel_UserGroup();
-    UserGroup currentGroup4Perm = new UserGroup();
+   private UserGroup current = new UserGroup();
+   private List<UserGroup> UserGroupList;
+   private AdminPanel_UserGroup UserGroupDao = new AdminPanel_UserGroup();
+   private UserGroup currentGroup4Perm = new UserGroup();
     private String ScreenCode = "AKG";
+    private Pagination pagination = new Pagination();
 
+    public Pagination getPagination() {
+        
+        return pagination;
+    }
+    
     public String getScreenCode() {
         return ScreenCode;
     }
@@ -60,12 +67,14 @@ public class UserGroupController implements Serializable {
     }
 
     public List<UserGroup> getPermGroupList() {
-        UserGroupList = UserGroupDao.getGroupList();
+        pagination.setRowCount(UserGroupDao.getCount());
+        pagination.setRowLimit(2);
+        UserGroupList = UserGroupDao.getGroupList(pagination);
         return UserGroupList;
     }
 
     public void setPermGroupList(List<UserGroup> PermGroupList) {
-        this.UserGroupList = UserGroupList;
+        this.UserGroupList = PermGroupList;
     }
     
      public void UpdateGroup()

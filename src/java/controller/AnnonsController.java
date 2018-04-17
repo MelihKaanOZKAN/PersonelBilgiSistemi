@@ -11,6 +11,7 @@ import entity.UserGroup;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import util.Pagination;
 
 /**
  *
@@ -26,22 +27,27 @@ public class AnnonsController {
     private String ScreenCode = "AnnonsCon";
     private int group;
 
-    public void delete(){
+    public Pagination getPagination() {
+        return pagination;
+    }
+    private Pagination pagination = new Pagination();
+
+    public void delete() {
         dao.deleteAnnons(selected);
         selected = new Annons();
         this.getSelected().getGroup().setGroupId(group);
     }
-    public void update(){
-        if(selected.getId() == 0)
-        {
+
+    public void update() {
+        if (selected.getId() == 0) {
             dao.addAnnons(selected);
-        }
-        else{
+        } else {
             dao.updateAnnons(selected);
         }
         selected = new Annons();
         this.getSelected().getGroup().setGroupId(group);
     }
+
     public int getGroup() {
         return group;
     }
@@ -50,6 +56,7 @@ public class AnnonsController {
         this.getSelected().getGroup().setGroupId(group);
         this.group = group;
     }
+
     public void setCurrentAnnos(Annons a) {
         selected = a;
     }
@@ -78,13 +85,16 @@ public class AnnonsController {
     }
 
     public List<Annons> getAnnonsList(UserGroup group, Boolean Mode) {
-        if(Mode)
-        {
-            AnnonsList = dao.getAnnons(group);
+        if (Mode) {
+            pagination.setRowCount(dao.getCount(group));
+            pagination.setRowLimit(2);
+            AnnonsList = dao.getAnnons(group, pagination);
+        } else {
+            pagination.setRowCount(dao.getCountAll(group));
+            pagination.setRowLimit(2);
+            AnnonsList = dao.getAllAnnons(group, pagination);
         }
-        else{
-             AnnonsList = dao.getAllAnnons(group);
-        }
+
         return AnnonsList;
     }
 

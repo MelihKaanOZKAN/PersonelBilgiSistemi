@@ -14,10 +14,7 @@
 
 
             <h:dataTable border="1" width="600" value="#{AdminPage_Users.getUserList(AdminPage_UserGroups.currentGroup4Perm)}"  var="user">
-                <h:column>
-                    <f:facet name="header">ID</f:facet>
-                        #{user.userId}
-                </h:column>
+             
                 <h:column>
                     <f:facet name="header">Kullanıcı Adı</f:facet>
                         #{user.userName}
@@ -42,14 +39,19 @@
 
                 </h:column>
             </h:dataTable>
+            <div class="pagination">
+                <h:form>
+                    <h:commandButton class="page-item disabled" rendered="#{!AdminPage_Users.page.isPrevActive()}" disabled="true" value="Önceki Sayfa"/>
+
+                    <h:commandButton class="page-link" rendered="#{AdminPage_Users.page.isPrevActive()}" value="Önceki Sayfa" action="#{AdminPage_Users.page.prevPage()}"/>
+                    <h:commandButton class="page-link" rendered="#{AdminPage_Users.page.isNextActive()}" value="Sonraki Sayfa" action="#{AdminPage_Users.page.nextPage()}"/>
+                    <h:commandButton class="page-item disabled" rendered="#{!AdminPage_Users.page.isNextActive()}" disabled="true" value="Sonraki Sayfa" />
+                 </h:form>
+                </div>
         </div>
         <div class="ButtonDiv">
             <h:form>  
             
-                    <div class="form-group">
-                        <h:outputText class="formText" value="Kullanıcı ID:"/>
-                        <h:inputText readonly="true" class="form-control" value="#{AdminPage_Users.selectedUser.userId}" />
-                    </div>
                     <div class="form-group">
                         <h:outputText class="formText" value="Kimlik Numarası:"/> 
                         <h:inputText class="form-control" value="#{AdminPage_Users.selectedUser.getuserinfo().citizensShipNumber}" /> 
@@ -65,6 +67,7 @@
                         <h:inputText readonly="true" class="form-control" value="#{AdminPage_Users.selectedUser.getuserinfo().ESurname}"/>
                     </div>
                     <div class="form-group">
+                        <h:outputText class="alert-danger" rendered="#{AdminPage_Users.isErrorActive}" value="Kullanıcı adı zaten mevcut!"/> <br></br>
                         <h:outputText class="formText" value="Kullanıcı Adı:"/> 
                         <h:inputText class="form-control" value="#{AdminPage_Users.selectedUser.userName}"/>
                     </div>

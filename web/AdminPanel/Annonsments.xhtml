@@ -6,7 +6,7 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <ui:define name="title">
-        Ana Sayfa
+        Duyuru İşlemleri
     </ui:define>
 
     <ui:define name="content">
@@ -41,6 +41,15 @@
                     </h:column>
                 </h:dataTable>
             </h:form>
+            <div class="pagination">
+                <h:form rendered="#{Annons.isGroupSelected()}">
+                    <h:commandButton class="page-item disabled" rendered="#{!Annons.pagination.isPrevActive()}" disabled="true" value="Önceki Sayfa"/>
+
+                    <h:commandButton class="page-link" rendered="#{Annons.pagination.isPrevActive()}" value="Önceki Sayfa" action="#{Annons.pagination.prevPage()}"/>
+                    <h:commandButton class="page-link" rendered="#{Annons.pagination.isNextActive()}" value="Sonraki Sayfa" action="#{Annons.pagination.nextPage()}"/>
+                    <h:commandButton class="page-item disabled" rendered="#{!Annons.pagination.isNextActive()}" disabled="true" value="Sonraki Sayfa" />
+                 </h:form>
+                </div>
         </div>
 
         <div class="ButtonDiv">

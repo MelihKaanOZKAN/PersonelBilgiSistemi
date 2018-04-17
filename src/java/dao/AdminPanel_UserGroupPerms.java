@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import util.Pagination;
 
 /**
  *
@@ -52,15 +53,35 @@ public class AdminPanel_UserGroupPerms {
          
      }
      
-    public List<Perms> getPermList(UserGroup group) {
-        List<Perms> result = new ArrayList<>();
-        try {
-            String sql = "SELECT PermId, PermName , PermLink, ScreenCode, ViewMenu FROM Perms P " +
+     public int getCountPermList(UserGroup group)
+     {
+         int result=0;
+          try {
+            String sql = "SELECT COUNT(PermId) FROM Perms P " +
 "            left join UserPerms UP on p.PermId = UP.permissionid " +
 "            and UP.UserTypeId = ? " +
 "            where UP.UserTypeId is null ";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
             st.setInt(1, group.getGroupId());
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            result = rs.getInt(1);
+           } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+         return result;
+     }
+    public List<Perms> getPermList(UserGroup group, Pagination page) {
+        List<Perms> result = new ArrayList<>();
+        try {
+            String sql = "SELECT PermId, PermName , PermLink, ScreenCode, ViewMenu FROM Perms P " +
+"            left join UserPerms UP on p.PermId = UP.permissionid " +
+"            and UP.UserTypeId = ? " +
+"            where UP.UserTypeId is null LIMIT ?,? ";
+            PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
+            st.setInt(1, group.getGroupId());
+            st.setInt(2, page.from());
+            st.setInt(3, page.to());
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Perms tmp = new Perms();
@@ -79,16 +100,48 @@ public class AdminPanel_UserGroupPerms {
         return result;
     }
     
-    public UserGroup getGroupPerms(UserGroup group) {
+    public int getCountGroupPerms(UserGroup group)
+     {
+         int result=0;
+          try {
+            String sql = "select COUNT(PermissionId) from UserPerms UP " +
+            "inner join Perms pr on pr.PermId = UP.PermissionId " +
+            "where UP.UserTypeId=?";
+            PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
+            st.setInt(1, group.getGroupId());
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            result = rs.getInt(1);
+           } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+         return result;
+     }
+    
+    public UserGroup getGroupPerms(UserGroup group, Pagination page) {
   
         try {
             List<Perms> result = new ArrayList<>();
-            String sql = "select PermissionId, pr.PermName, pr.PermLink, pr.ScreenCode, pr.ViewMenu, PermVisual, PermSet from UserPerms UP\n" +
-            "inner join Perms pr on pr.PermId = UP.PermissionId\n" +
+            PreparedStatement st;
+            if(page != null){
+            String sql = "select PermissionId, pr.PermName, pr.PermLink, pr.ScreenCode, pr.ViewMenu, PermVisual, PermSet from UserPerms UP " +
+            "inner join Perms pr on pr.PermId = UP.PermissionId " +
+            "where UP.UserTypeId=?"
+                    + " ORDER BY pr.PermName ASC LIMIT ?,?;";
+             st =(PreparedStatement) connect.connection.prepareStatement(sql);
+            st.setInt(1, group.getGroupId());
+            st.setInt(2, page.from());
+            st.setInt(3, page.to());
+            }
+            else{
+                String sql = "select PermissionId, pr.PermName, pr.PermLink, pr.ScreenCode, pr.ViewMenu, PermVisual, PermSet from UserPerms UP " +
+            "inner join Perms pr on pr.PermId = UP.PermissionId " +
             "where UP.UserTypeId=?"
                     + " ORDER BY pr.PermName ASC;";
-            PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
+             st =(PreparedStatement) connect.connection.prepareStatement(sql);
             st.setInt(1, group.getGroupId());
+            
+            }
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Perms tmp = new Perms();

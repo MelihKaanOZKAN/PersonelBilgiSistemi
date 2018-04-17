@@ -36,6 +36,15 @@
 
                 </h:column>
             </h:dataTable>
+             <div class="pagination">
+                 <h:form>
+                    <h:commandButton class="page-item disabled" rendered="#{!AdminPage_UserGroups.pagination.isPrevActive()}" disabled="true" value="Önceki Sayfa"/>
+
+                    <h:commandButton class="page-link" rendered="#{AdminPage_UserGroups.pagination.isPrevActive()}" value="Önceki Sayfa" action="#{AdminPage_UserGroups.pagination.prevPage()}"/>
+                    <h:commandButton class="page-link" rendered="#{AdminPage_UserGroups.pagination.isNextActive()}" value="Sonraki Sayfa" action="#{AdminPage_UserGroups.pagination.nextPage()}"/>
+                    <h:commandButton class="page-item disabled" rendered="#{!AdminPage_UserGroups.pagination.isNextActive()}" disabled="true" value="Sonraki Sayfa" />
+                 </h:form>
+                </div>
         </div>
         <div class="ButtonDiv">
             <table class="table">

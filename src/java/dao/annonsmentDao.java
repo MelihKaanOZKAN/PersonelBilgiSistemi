@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import util.ConnectionClass;
+import util.Pagination;
 
 /**
  *
@@ -21,7 +22,7 @@ public class annonsmentDao {
 
     ConnectionClass connect = new ConnectionClass();
 
-     public void deleteAnnons(Annons ans) {
+    public void deleteAnnons(Annons ans) {
         try {
             String sql = "DELETE FROM announcements WHERE RecordId=?";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
@@ -32,7 +33,7 @@ public class annonsmentDao {
         }
     }
 
-     public void updateAnnons(Annons ans) {
+    public void updateAnnons(Annons ans) {
         try {
             String sql = "UPDATE announcements SET UserGroupId=?, Text=?, Active=? WHERE RecordId=?";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
@@ -59,12 +60,44 @@ public class annonsmentDao {
         }
     }
 
-    public List<Annons> getAllAnnons(UserGroup Group) {
-        List<Annons> result = new ArrayList<>();
+    public int getCountAll(UserGroup Group) {
+        int result = 0;
         try {
-            String sql = "SELECT RecordId, Text, Active FROM announcements WHERE UserGroupId=?";
+            String sql = "SELECT COUNT(RecordId) FROM announcements WHERE UserGroupId=?";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
             st.setInt(1, Group.getGroupId());
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            result = rs.getInt(1);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    public int getCount(UserGroup Group) {
+        int result = 0;
+        try {
+            String sql = "SELECT COUNT(RecordId) FROM announcements WHERE UserGroupId=? AND Active=?";
+            PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
+            st.setInt(1, Group.getGroupId());
+            st.setBoolean(2, true);
+           ResultSet rs = st.executeQuery();
+            rs.next();
+            result = rs.getInt(1);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
+    public List<Annons> getAllAnnons(UserGroup Group, Pagination page) {
+        List<Annons> result = new ArrayList<>();
+        try {
+            String sql = "SELECT RecordId, Text, Active FROM announcements WHERE UserGroupId=? LIMIT ?,?";
+            PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
+            st.setInt(1, Group.getGroupId());
+            st.setInt(2, page.from());
+            st.setInt(3, page.to());
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Annons tmp = new Annons();
@@ -79,13 +112,16 @@ public class annonsmentDao {
         }
         return result;
     }
-    public List<Annons> getAnnons(UserGroup Group) {
+
+    public List<Annons> getAnnons(UserGroup Group, Pagination page) {
         List<Annons> result = new ArrayList<>();
         try {
-            String sql = "SELECT RecordId, Text FROM announcements WHERE UserGroupId=? AND Active=?";
+            String sql = "SELECT RecordId, Text FROM announcements WHERE UserGroupId=? AND Active=? LIMIT ?,?";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
             st.setInt(1, Group.getGroupId());
             st.setBoolean(2, true);
+            st.setInt(3, page.from());
+            st.setInt(4, page.to());
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Annons tmp = new Annons();

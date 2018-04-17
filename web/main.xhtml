@@ -16,6 +16,15 @@
                 <div class="w3-panel w3-pale-blue w3-leftbar w3-rightbar w3-border-blue"><h:outputText class="annons" value="#{a.text}"/></div>
             </h:column>
         </h:dataTable>
+         <div class="pagination">
+                <h:form>
+                    <h:commandButton class="page-item disabled" rendered="#{!Annons.pagination.isPrevActive()}" disabled="true" value="Önceki Sayfa"/>
+
+                    <h:commandButton class="page-link" rendered="#{Annons.pagination.isPrevActive()}" value="Önceki Sayfa" action="#{Annons.pagination.prevPage()}"/>
+                    <h:commandButton class="page-link" rendered="#{Annons.pagination.isNextActive()}" value="Sonraki Sayfa" action="#{Annons.pagination.nextPage()}"/>
+                    <h:commandButton class="page-item disabled" rendered="#{!Annons.pagination.isNextActive()}" disabled="true" value="Sonraki Sayfa" />
+                 </h:form>
+                </div>
     </ui:define>
 
 </ui:composition>

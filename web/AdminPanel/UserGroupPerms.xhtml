@@ -6,7 +6,7 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <ui:define name="title">
-       Grupların Yetiklerini Düzenle
+       Grupların Yetkilerini Düzenle
     </ui:define>
 
     <ui:define name="content">
@@ -47,11 +47,19 @@
                     </center>
                 </h:column>
             </h:dataTable>
+             <div class="pagination">
+                <h:form>
+                    <h:commandButton class="page-item disabled" rendered="#{!AdminPage_UserGroupPerms.pagePermList.isPrevActive()}" disabled="true" value="Önceki Sayfa"/>
+                    <h:commandButton class="page-link" rendered="#{AdminPage_UserGroupPerms.pagePermList.isPrevActive()}" value="Önceki Sayfa" action="#{AdminPage_UserGroupPerms.pagePermList.prevPage()}"/>
+                    <h:commandButton class="page-link" rendered="#{AdminPage_UserGroupPerms.pagePermList.isNextActive()}" value="Sonraki Sayfa" action="#{AdminPage_UserGroupPerms.pagePermList.nextPage()}"/>
+                    <h:commandButton class="page-item disabled" rendered="#{!AdminPage_UserGroupPerms.pagePermList.isNextActive()}" disabled="true" value="Sonraki Sayfa" />
+                 </h:form>
+                </div>
         </h:form>
         </div>
-        <div style="margin-left: 25px; float:left">
+        <div style="float:right">
             <h:form>
-                <h:dataTable class="table table-dark table-striped" border="1" width="600"  value="#{AdminPage_UserGroups.currentGroup4Perm.getGroupPerms(false)}"  var="perm">
+                <h:dataTable class="table table-dark table-striped" border="1" width="600"  value="#{AdminPage_UserGroupPerms.selectedGroup.getGroupPerms(false)}"  var="perm">
                     <h:column>
                         <f:facet name="header">ID</f:facet>
                             #{perm.perm.permId}
@@ -81,6 +89,14 @@
                         </center>
                     </h:column>
                 </h:dataTable>
+                <div class="pagination">
+                <h:form>
+                    <h:commandButton class="page-item disabled" rendered="#{!AdminPage_UserGroupPerms.pageGroupPerm.isPrevActive()}" disabled="true" value="Önceki Sayfa"/>
+                    <h:commandButton class="page-link" rendered="#{AdminPage_UserGroupPerms.pageGroupPerm.isPrevActive()}" value="Önceki Sayfa" action="#{AdminPage_UserGroupPerms.pageGroupPerm.prevPage()}"/>
+                    <h:commandButton class="page-link" rendered="#{AdminPage_UserGroupPerms.pageGroupPerm.isNextActive()}" value="Sonraki Sayfa" action="#{AdminPage_UserGroupPerms.pageGroupPerm.nextPage()}"/>
+                    <h:commandButton class="page-item disabled" rendered="#{!AdminPage_UserGroupPerms.pageGroupPerm.isNextActive()}" disabled="true" value="Sonraki Sayfa" />
+                 </h:form>
+                </div>
             </h:form>
         </div>
 

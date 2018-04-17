@@ -6,6 +6,7 @@
 package dao;
 
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import entity.User;
 import entity.UserGroup;
 import entity.personalinfo;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import util.ConnectionClass;
+import util.Pagination;
 
 /**
  *
@@ -23,16 +25,37 @@ public class Users {
 
     ConnectionClass connect = new ConnectionClass();
 
-    public List<User> getUserList(UserGroup group) {
-        List<User> result = new ArrayList<>();
-
+    public int getCount(UserGroup group)
+    {
+          int result=0;
         try {
-            String sql = "SELECT UserId, Username, Password,  PI.EName, PI.ESurname, PI.CitizensShipNumber, PI.PInfoId FROM Users "
+             String sql = "SELECT COUNT(UserId) FROM Users "
                     + "inner join PersonalInfo PI on PI.PInfoId = PersonId "
                     + " WHERE UserType=?";
 
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
             st.setInt(1, group.getGroupId());
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            result = rs.getInt(1);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    public List<User> getUserList(UserGroup group, Pagination page) {
+        List<User> result = new ArrayList<>();
+
+        try {
+            String sql = "SELECT UserId, Username, Password,  PI.EName, PI.ESurname, PI.CitizensShipNumber, PI.PInfoId FROM Users "
+                    + "inner join PersonalInfo PI on PI.PInfoId = PersonId "
+                    + " WHERE UserType=? LIMIT ?,?";
+
+            PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
+            st.setInt(1, group.getGroupId());
+             st.setInt(2, page.from());
+            st.setInt(3, page.to());
+           
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 User user = new User();
@@ -55,7 +78,7 @@ public class Users {
         return result;
     }
 
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         try {
             String sql = "INSERT INTO Users (UserName, Password, userType, PersonId) VALUES (?,?,?,?);";
             PreparedStatement st = (PreparedStatement) connect.connection.prepareStatement(sql);
@@ -64,8 +87,11 @@ public class Users {
             st.setInt(3, user.getUserType().getGroupId());
             st.setInt(4, user.getuserinfo().getPInfoId());
             st.executeUpdate();
-        } catch (SQLException ex) {
+            return true;
+        } 
+        catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 

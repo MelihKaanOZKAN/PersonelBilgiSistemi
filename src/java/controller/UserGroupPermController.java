@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import util.Pagination;
 
 /**
  *
@@ -26,6 +27,24 @@ public class UserGroupPermController implements Serializable {
    private List<Perms> PermList;
    private AdminPanel_UserGroupPerms UserGroupPermDao = new AdminPanel_UserGroupPerms();
    private UserGroup selectedGroup;
+   private Pagination pagePermList = new Pagination();
+   private Pagination pageGroupPerm = new Pagination();
+
+    public Pagination getPagePermList() {
+        return pagePermList;
+    }
+
+    public void setPagePermList(Pagination pagePermList) {
+        this.pagePermList = pagePermList;
+    }
+
+    public Pagination getPageGroupPerm() {
+        return pageGroupPerm;
+    }
+
+    public void setPageGroupPerm(Pagination pageGroupPerm) {
+        this.pageGroupPerm = pageGroupPerm;
+    }
    
     public boolean isAddActive(Perms perm)
     {
@@ -52,6 +71,10 @@ public class UserGroupPermController implements Serializable {
         }
     }
     public UserGroup getSelectedGroup() {
+        this.pageGroupPerm.setRowCount(UserGroupPermDao.getCountGroupPerms(selectedGroup));
+        this.pageGroupPerm.setRowLimit(2);
+        
+        selectedGroup = UserGroupPermDao.getGroupPerms(selectedGroup, this.pageGroupPerm);
         return selectedGroup;
     }
 
@@ -65,6 +88,7 @@ public class UserGroupPermController implements Serializable {
 
 
     public void setSelectedGroup(UserGroup selectedGroup) {
+        
         this.selectedGroup = selectedGroup;
     }
 
@@ -74,7 +98,9 @@ public class UserGroupPermController implements Serializable {
     
     public List<Perms> getPermList(UserGroup grp) {
         selectedGroup = grp;
-        PermList = UserGroupPermDao.getPermList(selectedGroup);
+        this.pagePermList.setRowCount(UserGroupPermDao.getCountPermList(grp));
+        this.pagePermList.setRowLimit(2);
+        PermList = UserGroupPermDao.getPermList(selectedGroup, this.pagePermList);
         return PermList;
     }
 
@@ -86,14 +112,18 @@ public class UserGroupPermController implements Serializable {
     public void setPermtoGroup()
     {
         UserGroupPermDao.addPerm2Group(current, selectedGroup);
-        selectedGroup = UserGroupPermDao.getGroupPerms(selectedGroup);
+        this.pageGroupPerm.setRowCount(UserGroupPermDao.getCountGroupPerms(selectedGroup));
+        this.pageGroupPerm.setRowLimit(2);
+        selectedGroup = UserGroupPermDao.getGroupPerms(selectedGroup, this.pageGroupPerm);
         current=null;
         PermList = null;
     }
     public void deletePermFromGroup(Perms perm)
     {
         UserGroupPermDao.deletePermFromGroup(perm, selectedGroup);
-        selectedGroup = UserGroupPermDao.getGroupPerms(selectedGroup);
+         this.pageGroupPerm.setRowCount(UserGroupPermDao.getCountGroupPerms(selectedGroup));
+        this.pageGroupPerm.setRowLimit(2);
+        selectedGroup = UserGroupPermDao.getGroupPerms(selectedGroup, this.pageGroupPerm);
     }
     
    
