@@ -27,7 +27,7 @@
                     <f:facet name="header">İsim ve Soyisim</f:facet>
                         #{user.getuserinfo().EName}  #{user.getuserinfo().ESurname}
                 </h:column>
-                <h:column>
+                <h:column rendered="#{auth.isAuthorized2Set(AdminPage_Users.screenCode)}">
                     <center>
                         <f:facet name="header">İşlemler</f:facet>
                         <div class="btn-group">
@@ -50,7 +50,7 @@
                 </div>
         </div>
         <div class="ButtonDiv">
-            <h:form>  
+            <h:form rendered="#{auth.isAuthorized2Set(AdminPage_Users.screenCode)}">
             
                     <div class="form-group">
                         <h:outputText class="formText" value="Kimlik Numarası:"/> 

@@ -8,6 +8,7 @@ package controller;
 import dao.annonsmentDao;
 import entity.Annons;
 import entity.UserGroup;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -19,7 +20,7 @@ import util.Pagination;
  */
 @ManagedBean(name = "Annons")
 @SessionScoped
-public class AnnonsController {
+public class AnnonsController implements Serializable {
 
     private annonsmentDao dao = new annonsmentDao();
     private List<Annons> AnnonsList;

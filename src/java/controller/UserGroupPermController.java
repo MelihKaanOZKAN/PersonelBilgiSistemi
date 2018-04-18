@@ -29,7 +29,12 @@ public class UserGroupPermController implements Serializable {
    private UserGroup selectedGroup;
    private Pagination pagePermList = new Pagination();
    private Pagination pageGroupPerm = new Pagination();
+   private String ScreenCode = "APGPerms";
 
+    public String getScreenCode() {
+        return ScreenCode;
+    }
+   
     public Pagination getPagePermList() {
         return pagePermList;
     }

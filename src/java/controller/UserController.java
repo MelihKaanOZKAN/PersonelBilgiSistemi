@@ -11,6 +11,7 @@ import dao.Users;
 import dao.personalinfoDao;
 import entity.User;
 import entity.UserGroup;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -22,7 +23,7 @@ import util.Pagination;
  */
 @ManagedBean(name = "AdminPage_Users")
 @SessionScoped
-public class UserController {
+public class UserController implements Serializable {
 
     private UserGroup selectedGroup;
     private List<User> userList;
@@ -31,7 +32,12 @@ public class UserController {
     private personalinfoDao PinfoDao = new personalinfoDao();
     private Pagination page = new Pagination();
     private boolean isErrorActive;
+    private String ScreenCode = "APUsers";
 
+    public String getScreenCode() {
+        return ScreenCode;
+    }
+    
     public boolean isIsErrorActive() {
         return isErrorActive;
     }

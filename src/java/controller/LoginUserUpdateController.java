@@ -9,6 +9,7 @@ package controller;
 import dao.Users;
 import entity.User;
 import entity.changePass;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -18,7 +19,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name = "UserChangePass")
 @SessionScoped
-public class LoginUserUpdateController {
+public class LoginUserUpdateController implements Serializable {
 
     private Users userDao = new Users();
     private boolean wrongPass = false;

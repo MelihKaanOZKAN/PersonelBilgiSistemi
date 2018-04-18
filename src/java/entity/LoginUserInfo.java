@@ -5,6 +5,7 @@
  */
 package entity;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,7 +16,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name = "authUserInfo")
 @SessionScoped
-public class LoginUserInfo {
+public class LoginUserInfo implements Serializable {
 
     private boolean authStatus = false;
     private User user;

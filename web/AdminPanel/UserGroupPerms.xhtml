@@ -13,10 +13,6 @@
         <div style="float:left">
         <h:form>
             <h:dataTable class="table table-striped" border="1" width="600"  value="#{AdminPage_UserGroupPerms.getPermList(AdminPage_UserGroups.currentGroup4Perm)}"  var="perm">
-                <h:column>
-                    <f:facet name="header">ID</f:facet>
-                        #{perm.perm.permId}
-                </h:column>
                  <h:column>
                     <f:facet name="header">Ekran Kodu</f:facet>
                         #{perm.perm.screenCode}
@@ -35,7 +31,7 @@
 
                     </h:selectBooleanCheckbox>
                 </h:column>
-                <h:column>
+                <h:column rendered="#{auth.isAuthorized2Set(AdminPage_UserGroupPerms.screenCode)}">
                     <center>
                         <f:facet name="header">İşlemler</f:facet>
                         <div class="btn-group">
@@ -58,12 +54,8 @@
         </h:form>
         </div>
         <div style="float:right">
-            <h:form>
+            <h:form rendered="#{auth.isAuthorized2Set(AdminPage_UserGroupPerms.screenCode)}">
                 <h:dataTable class="table table-dark table-striped" border="1" width="600"  value="#{AdminPage_UserGroupPerms.selectedGroup.getGroupPerms(false)}"  var="perm">
-                    <h:column>
-                        <f:facet name="header">ID</f:facet>
-                            #{perm.perm.permId}
-                    </h:column>
                      <h:column>
                     <f:facet name="header">Ekran Kodu</f:facet>
                         #{perm.perm.screenCode}

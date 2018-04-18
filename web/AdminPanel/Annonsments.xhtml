@@ -48,26 +48,28 @@
                     <h:commandButton class="page-link" rendered="#{Annons.pagination.isPrevActive()}" value="Önceki Sayfa" action="#{Annons.pagination.prevPage()}"/>
                     <h:commandButton class="page-link" rendered="#{Annons.pagination.isNextActive()}" value="Sonraki Sayfa" action="#{Annons.pagination.nextPage()}"/>
                     <h:commandButton class="page-item disabled" rendered="#{!Annons.pagination.isNextActive()}" disabled="true" value="Sonraki Sayfa" />
-                 </h:form>
-                </div>
+                </h:form>
+            </div>
         </div>
 
         <div class="ButtonDiv">
-            <h:form rendered="#{Annons.isGroupSelected()}">
-                <div class="form-group">
-                    <h:outputText class="formText" value="Duyuru Metni:"/> 
-                    <h:inputTextarea class="form-control" value="#{Annons.selected.text}" required="true"/>
-                </div>
-                <div class="form-group">
-                    <h:outputText class="formText" value="Aktif Mi?:"/> 
-                    <h:selectBooleanCheckbox class="checkBox" value="#{Annons.selected.active}"/>
-                </div>
-                <div class="form-group">
-                    <h:commandButton class="btn btn-primary" value="Kaydet" action="#{Annons.update()}"/>
-                    <h:commandButton class="btn btn-danger btnproperties" value="Sil" onclick="return confirm('Seçili duyuru silinecektir. Onaylıyor musunuz?')
-                                     " action="#{Annons.delete()}"/>
-                </div>
-            </h:form>
+            <h:panelGrid rendered="#{auth.isAuthorized2Set(Annons.screenCode)}">
+                <h:form rendered="#{Annons.isGroupSelected()}">
+                    <div class="form-group">
+                        <h:outputText class="formText" value="Duyuru Metni:"/> 
+                        <h:inputTextarea class="form-control" value="#{Annons.selected.text}" required="true"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputText class="formText" value="Aktif Mi?:"/> 
+                        <h:selectBooleanCheckbox class="checkBox" value="#{Annons.selected.active}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:commandButton class="btn btn-primary" value="Kaydet" action="#{Annons.update()}"/>
+                        <h:commandButton class="btn btn-danger btnproperties" value="Sil" onclick="return confirm('Seçili duyuru silinecektir. Onaylıyor musunuz?')
+                                         " action="#{Annons.delete()}"/>
+                    </div>
+                </h:form>
+            </h:panelGrid>
         </div>
 
     </ui:define>

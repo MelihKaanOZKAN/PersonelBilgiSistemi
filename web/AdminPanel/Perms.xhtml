@@ -13,10 +13,6 @@
         <div class="FormDiv">
             <h:form>
                 <h:dataTable border="1" width="600" class="table table-striped" value="#{AdminPage_Perms.permList}"  var="perm">
-                    <h:column headerClass="table-hover">
-                        <f:facet name="header">ID</f:facet>
-                            #{perm.permId}
-                    </h:column>
                     <h:column headerClass="thead-dark">
                         <f:facet name="header"> 
                             <h:outputText class="thead-dark" value="Ekran Kodu:"/>
@@ -61,11 +57,7 @@
             </h:form>
         </div>
         <div class="ButtonDiv">
-            <h:form rendered="#{auth.isAuthorized2Set(AdminPage_Perms.screenCode)}">>
-                <div class="form-group">
-                    <h:outputText class="formText" value="Yetki Id:"/> 
-                    <h:inputText readonly="true" class="form-control" value="#{AdminPage_Perms.currentPerm.permId}"></h:inputText>
-                </div>
+            <h:form rendered="#{auth.isAuthorized2Set(AdminPage_Perms.screenCode)}">
                 <div class="form-group">
                     <h:outputText class="formText" value="Ekran kodu:"/> 
                     <h:inputText class="form-control" value="#{AdminPage_Perms.currentPerm.screenCode}" required="true"></h:inputText>

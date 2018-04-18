@@ -15,10 +15,6 @@
 
             <h:dataTable border="1" width="600" value="#{AdminPage_UserGroups.permGroupList}"  var="grp">
                 <h:column>
-                    <f:facet name="header">ID</f:facet>
-                        #{grp.groupId}
-                </h:column>
-                <h:column>
                     <f:facet name="header">Grup Adı</f:facet>
                         #{grp.groupName}
                 </h:column>
@@ -49,10 +45,6 @@
         <div class="ButtonDiv">
             <table class="table">
                 <h:form rendered="#{auth.isAuthorized2Set(AdminPage_UserGroups.screenCode)}">
-                      <div class="form-group">
-                    <h:outputText class="formText" value="Grup Id:"/>
-                    <h:inputText class="form-control" readonly="true" value="#{AdminPage_UserGroups.current.groupId}"></h:inputText> 
-                     </div>
                   <div class="form-group">
                      <h:outputText class="formText" value="Grup Adı:"/>
                      <h:inputText class="form-control" value="#{AdminPage_UserGroups.current.groupName}" required="true"></h:inputText> 

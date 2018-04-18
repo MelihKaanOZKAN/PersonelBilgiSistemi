@@ -51,7 +51,7 @@ public class LoginFilter implements Filter {
             if (u.isAuthStatus()) {
                 if (!pageRequested.contains("resource")) {
                     
-                    if (u.hasPerm(pageRequested, req.getContextPath()) || pageRequested.contains("index")) {
+                    if (u.hasPerm(pageRequested, req.getContextPath()) || pageRequested.contains("index") || pageRequested.contains("PasswordChange")) {
                         chain.doFilter(request, response);
                     } else {
                         res.sendRedirect(req.getContextPath() + "/faces/index.xhtml");
