@@ -32,7 +32,7 @@ public String emergency(EmployeeInfo person){
     public String updateForm(EmployeeInfo person)
     {
         this.personal=person;
-        return "/addPerson.xhtml?faces-redirect=true";
+        return "addPerson.xhtml?faces-redirect=true";
     }
     
     public String update(personalinfo person)
@@ -48,7 +48,7 @@ public String emergency(EmployeeInfo person){
     }
     
     public String create() {
-        this.getPersonalDao().addPersonal(this.personal.getPinfo());
+        this.getPersonalDao().addPersonal(this.personal);
         return "addPerson";
     }
 

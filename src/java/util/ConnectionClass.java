@@ -20,7 +20,7 @@ public class ConnectionClass {
     public ConnectionClass() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            this.connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/employeeinfosystem?user=root&password=1234");
+            this.connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3340/employeeinfosystem?user=root&password=1234");
         } catch (ClassNotFoundException | SQLException err) {
             System.out.println(err.toString());
         }

@@ -11,42 +11,50 @@
 
     <ui:define name="content">
         <div class="container">
+            <h:form>
             <div class="row">
                 <div class="col-md-6">
-                    <h:form>
+                    
                         <div class="form-group">
-                            <label for="inputName">Personel İsim:</label><h:inputText readonly="true" value="#{Personal.personal.pinfo.EName}" class="form-control" size="5"/><br />
-                            <label for="inputName">Personel Soyisim:</label><h:inputText readonly="true" value="#{Personal.personal.pinfo.ESurname}" class="form-control"/><br />
-                            <label for="inputName">SGK Numara:</label><h:inputText readonly="true" value="#{Personal.personal.pinfo.socialSecurityNumber}" class="form-control"/><br />
-                            <label for="inputName">T.C Numara:</label><h:inputText readonly="true" value="#{Personal.personal.pinfo.citizensShipNumber}" class="form-control"/><br />
-                            <label for="inputName">Telefon:</label><h:inputText readonly="true" value="#{Personal.personal.pinfo.communication.phoneNumber}" class="form-control"/><br />
-                            <label for="inputName">Email:</label><h:inputText readonly="true" value="#{Personal.personal.pinfo.communication.email}" class="form-control"/><br />
-                        
-                        
+                            <label for="inputName">Personel İsim:</label><h:inputText readonly="false" value="#{Personal.personal.pinfo.EName}" class="form-control" size="5"/><br />
+                            <label for="inputName">Personel Soyisim:</label><h:inputText readonly="false" value="#{Personal.personal.pinfo.ESurname}" class="form-control"/><br />
+                            <label for="inputName">SGK Numara:</label><h:inputText readonly="false" value="#{Personal.personal.pinfo.socialSecurityNumber}" class="form-control"/><br />
+                            <label for="inputName">T.C Numara:</label><h:inputText readonly="false" value="#{Personal.personal.pinfo.citizensShipNumber}" class="form-control"/><br />
+                            <label for="inputName">Telefon:</label><h:inputText readonly="false" value="#{Personal.personal.pinfo.communication.phoneNumber}" class="form-control"/><br />
+                            <label for="inputName">Email:</label><h:inputText readonly="false" value="#{Personal.personal.pinfo.communication.email}" class="form-control"/><br />
+
+
                         </div>
 
-                    </h:form>
+                   
 
                 </div>
                 <div class="col-md-6">
-                    <h:form>
                         <div class="form-group">
-                            <label for="inputName">Doğum Tarihi:</label><h:inputText readonly="true" value="#{Personal.personal.pinfo.birthDate}" class="form-control"><f:converter converterId="convertDate"/></h:inputText><br />
-                            <label for="inputName">Cinsiyet:</label><h:selectOneMenu readonly="true" value="#{Personal.personal.pinfo.gender}" class="form-control">
+                            <label for="inputName">Doğum Tarihi:</label><h:inputText readonly="false" value="#{Personal.personal.pinfo.birthDate}" class="form-control"><f:converter converterId="convertDate"/></h:inputText><br />
+                            <label for="inputName">Cinsiyet:</label><h:selectOneMenu readonly="false" value="#{Personal.personal.pinfo.gender}" class="form-control">
                                 <f:selectItem itemValue = "1" itemLabel = "Erkek" /> 
                                 <f:selectItem itemValue = "2" itemLabel = "Kadın" /> </h:selectOneMenu><br />
-                            <label for="inputName">Medeni Hal:</label><h:selectOneMenu readonly="true" value="#{Personal.personal.pinfo.maritalStatus}" class="form-control">
+                            <label for="inputName">Medeni Hal:</label><h:selectOneMenu readonly="false" value="#{Personal.personal.pinfo.maritalStatus}" class="form-control">
                                 <f:selectItem itemValue = "1" itemLabel = "Evli" /> 
                                 <f:selectItem itemValue = "2" itemLabel = "Bekar" /> </h:selectOneMenu><br />
                         </div>
                         <div class="form-group">
-                            <label for="inputName">Departman:</label><h:inputText readonly="true" value="#{Personal.personal.department.departmentName}" class="form-control"/>
-                                <label for="inputName">Görevi:</label><h:inputText readonly="true" value="#{Personal.personal.job.jobName}" class="form-control"/>
-                             
+                            <label for="inputName">Departman:</label><h:inputText readonly="false" value="#{Personal.personal.department.departmentName}" class="form-control"/>
+                            <label for="inputName">Görevi:</label><h:inputText readonly="false" value="#{Personal.personal.job.jobName}" class="form-control"/>
+
                         </div>
-                    </h:form>
+                           <h:commandButton type="submit" value="Kaydet" class="btn btn-info" action="#{Personal.create()}"/>
+                        
+
+                   
+                </div>
+                <div class="col-md-6">
+                    Adres Bilgisi:<br />
+                    <h:inputTextarea class="form-control" value="#{Personal.personal.pinfo.adress.adress}" required="true"/>
                 </div>
             </div>  
+                 </h:form>
         </div>
     </ui:define>
 

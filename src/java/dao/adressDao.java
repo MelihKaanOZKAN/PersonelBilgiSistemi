@@ -1,6 +1,7 @@
 package dao;
 
 import controller.City;
+import entity.EmployeeInfo;
 import entity.adress;
 import util.ConnectionClass;
 import entity.personalinfo;
@@ -21,19 +22,23 @@ public class adressDao {
     PreparedStatement ps;
     String sorgu;
 
-    public void addAdress(personalinfo person) {
+    public int addAdress(EmployeeInfo person) {
+        int result=0;
         try {
-            sorgu = "INSERT INTO adress (Adress,City,District) VALUES (?,?,?)";
+            
+            sorgu = "INSERT INTO adress (Adress) VALUES (?)";
             ps = (PreparedStatement) connection.connection.prepareStatement(sorgu, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, person.getAdress().getAdress());
-            ps.setString(2, person.getAdress().getCity().getCityName());
-            ps.setString(3, person.getAdress().getDistrict().getDistrictName());
-            ps.executeQuery();
+            ps.setString(1, person.getPinfo().getAdress().getAdress());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            result = rs.getInt(1);
             ps.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return result;
     }
 
     public void updateAdress(personalinfo person) {

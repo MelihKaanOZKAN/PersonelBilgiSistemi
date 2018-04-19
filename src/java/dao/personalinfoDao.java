@@ -10,24 +10,29 @@ import entity.personalinfo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Generated;
 
 public class personalinfoDao {
 
     ConnectionClass connection = new ConnectionClass();
 
-    public void addPersonal(personalinfo person) {
+    public void addPersonal(EmployeeInfo person) {
+        adressDao aDao = new adressDao();
         try {
-            String sorgu = "insert into personalinfo (EName,ESurname, SocialSecurityNumber,CitizensShipNumber,BirthDate,MaritalStatus) values(?,?,?,?,?,?)";
+            person.getPinfo().getAdress().setAdressId(aDao.addAdress(person));
+            String sorgu = "insert into personalinfo (EName,ESurname, SocialSecurityNumber,CitizensShipNumber,BirthDate,Gender,MaritalStatus,Adress) values(?,?,?,?,?,?,?,?)";
             PreparedStatement ps = (PreparedStatement) connection.connection.prepareStatement(sorgu);
-            ps.setString(1, person.getEName());
-            ps.setString(2, person.getESurname());
-            ps.setString(3, person.getSocialSecurityNumber());
-            ps.setString(4, person.getCitizensShipNumber());
-            ps.setDate(5, person.getBirthDate());
-            //ps.setBoolean(6, person.getGender());
-            ps.setInt(6, person.getMaritalStatus());
+            ps.setString(1, person.getPinfo().getEName());
+            ps.setString(2, person.getPinfo().getESurname());
+            ps.setString(3, person.getPinfo().getSocialSecurityNumber());
+            ps.setString(4, person.getPinfo().getCitizensShipNumber());
+            ps.setDate(5, person.getPinfo().getBirthDate());
+            ps.setBoolean(6, person.getPinfo().getGender());
+            ps.setInt(7, person.getPinfo().getMaritalStatus());
+            ps.setInt(8, person.getPinfo().getAdress().getAdressId());
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {

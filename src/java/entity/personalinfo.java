@@ -100,6 +100,8 @@ public class personalinfo {
     }
 
     public communicationinfo getCommunication() {
+        if(Communication == null)
+            Communication = new communicationinfo();
         return Communication;
     }
 

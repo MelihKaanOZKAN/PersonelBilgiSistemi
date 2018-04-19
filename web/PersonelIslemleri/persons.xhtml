@@ -19,7 +19,7 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Personal İsim</f:facet>
-                        <h:commandLink action="#{Personal.updateForm(person)}" value="#{person.pinfo.EName}"/>
+                        #{person.pinfo.EName}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Personal Soyisim</f:facet>
@@ -37,8 +37,10 @@
                     <h:column>
                         <f:facet name="header">Sil</f:facet>
                         <div class="btn btn-group" role="group" aria-label="Basic example">
-                            <h:commandButton rendered="false" action="#{Personal.delete(person)}" class="btn btn-danger" value="Sil"/>
+                            <h:commandButton type="submit" value="Ayrıntılar" class="btn btn-info" action="#{Personal.updateForm(person)}"/>
+                           
                             <h:commandButton type="submit" value="İzin İşlemleri" class="btn btn-info" action="#{Personal.izinIslem(person)}"/>
+                           <h:commandButton rendered="false" action="#{Personal.delete(person)}" class="btn btn-danger" value="Sil"/>
                             <h:commandButton type="submit" value="Acil Durum Bilgisi" class="btn btn-info" action="#{Personal.emergency(person)}"/>
                         
                         
